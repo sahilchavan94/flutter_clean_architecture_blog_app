@@ -18,7 +18,7 @@ class AppTheme {
       ),
       //display medium
       displayMedium: TextStyle(
-        fontSize: 17,
+        fontSize: 14.5,
         fontWeight: FontWeight.w400,
       ),
       //display small
@@ -53,7 +53,7 @@ class AppTheme {
           color: AppPallete.grayLight,
         ),
         contentPadding: const EdgeInsets.symmetric(
-          vertical: 12,
+          vertical: 9,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),

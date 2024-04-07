@@ -1,12 +1,13 @@
-import 'package:blog_app/core/common/widgets/button_widget.dart';
-import 'package:blog_app/core/theme/app_pallete.dart';
+import 'package:blog_app/features/blog/presentation/pages/blog_home.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
+import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/validators/auth_validators.dart';
+import 'package:blog_app/core/common/widgets/button_widget.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/signup_view.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_input_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -48,6 +49,7 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
         if (state is AuthFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
+              duration: const Duration(milliseconds: 1500),
               content: Text(state.message),
             ),
           );
@@ -55,11 +57,17 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
         if (state is AuthSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
+              duration: Duration(milliseconds: 1500),
               content: Text('Logged into account'),
             ),
           );
-          //for fetching the latest user data
           context.read<AuthBloc>().add(AuthIsUserLoggedIn());
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const BlogHome(),
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -100,7 +108,7 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
                   style:
                       AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
                     color: AppPallete.grayLight,
-                    fontSize: 14,
+                    fontSize: 13,
                     fontWeight: FontWeight.w300,
                   ),
                 ),

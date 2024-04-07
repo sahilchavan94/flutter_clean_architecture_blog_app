@@ -59,6 +59,7 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
         if (state is AuthSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
+              duration: Duration(milliseconds: 1500),
               content: Text('Created new account'),
             ),
           );
@@ -74,6 +75,7 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
         if (state is AuthFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
+              duration: const Duration(milliseconds: 1500),
               content: Text(state.message),
             ),
           );

@@ -52,13 +52,14 @@ class _MyAppState extends State<MyApp> {
       theme: AppTheme.darkThemeData,
       themeMode: ThemeMode.dark,
       home: BlocSelector<CurrentUserCubit, CurrentUserState, bool>(
-          selector: (state) => state is CurrentUserDataFetched,
-          builder: (context, isFetched) {
-            if (isFetched) {
-              return const BlogHome();
-            }
-            return const SignInView();
-          }),
+        selector: (state) => state is CurrentUserDataFetched,
+        builder: (context, isFetched) {
+          if (isFetched) {
+            return const BlogHome();
+          }
+          return const SignInView();
+        },
+      ),
     );
   }
 }

@@ -42,7 +42,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       AuthIsUserLoggedIn event, Emitter<AuthState> emit) async {
     final response = await getUser.call();
     response.fold(
-      (l) => emit(AuthFailure("User not logged in")),
+      (l) => emit(AuthFailure("Sign In or create a new Account")),
       (r) => _emitAuthSuccess(emit, r),
     );
   }

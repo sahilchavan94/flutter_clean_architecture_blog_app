@@ -1,4 +1,5 @@
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:blog_app/features/auth/presentation/pages/signin_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,10 +20,16 @@ class _BlogHomeState extends State<BlogHome> {
           // context.read<AuthBloc>().add(AuthIsUserLoggedIn());
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
+              duration: Duration(milliseconds: 1500),
               content: Text('Logged out from current account'),
             ),
           );
-          context.read<AuthBloc>().add(AuthIsUserLoggedIn());
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SignInView(),
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -33,7 +40,7 @@ class _BlogHomeState extends State<BlogHome> {
               onTap: () {
                 context.read<AuthBloc>().add(AuthSignOut());
               },
-              child: const Text("Log out from app"),
+              child: const Text("Log out"),
             ),
           ),
         );
