@@ -1,11 +1,13 @@
 import 'package:blog_app/core/common/widgets/button_widget.dart';
+import 'package:blog_app/core/strings/strings.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/core/validators/auth_validators.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:blog_app/features/auth/presentation/pages/select_interests.dart';
 import 'package:blog_app/features/auth/presentation/pages/signin_view.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_input_widget.dart';
-import 'package:blog_app/features/blog/presentation/pages/blog_home.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +20,8 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> with AuthValidators {
   bool isActive = false;
+  bool hidePassword = true;
+  bool hideConfirmPassword = true;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -48,7 +52,13 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
 
   void _updateActive() {
     setState(() {
-      isActive = _formKey.currentState!.validate();
+      if (_firstNameController.text.isNotEmpty &&
+          _lastNameController.text.isNotEmpty &&
+          _emailController.text.isNotEmpty &&
+          _passwordController.text.isNotEmpty &&
+          _confirmPasswordController.text.isNotEmpty) {
+        isActive = _formKey.currentState!.validate();
+      }
     });
   }
 
@@ -57,17 +67,10 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              duration: Duration(milliseconds: 1500),
-              content: Text('Created new account'),
-            ),
-          );
-          context.read<AuthBloc>().add(AuthIsUserLoggedIn());
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const BlogHome(),
+              builder: (context) => const SelectInterests(),
             ),
           );
         }
@@ -83,152 +86,169 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
       },
       builder: (context, state) {
         return Scaffold(
-          body: Scrollbar(
-            interactive: true,
-            child: SingleChildScrollView(
-              reverse: false,
-              physics: const RangeMaintainingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 40.0,
-                  vertical: 100,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: MediaQuery.of(context).size.height * .1,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        'assets/images/blog_logo.png',
+                        height: 32,
+                        width: 32,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'Get Started',
+                        style: AppTheme.darkThemeData.textTheme.displayLarge,
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(
+                    height: 8,
+                  ),
+
+                  Text(
+                    AppStrings.signUpString,
+                    style:
+                        AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
+                      color: AppPallete.grayLight,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+
+                  //form
+                  Form(
+                    key: _formKey,
+                    child: Column(
                       children: [
-                        Image.asset(
-                          'assets/images/blog_logo.png',
-                          height: 32,
-                          width: 32,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            AuthInputWidget(
+                              width: MediaQuery.of(context).size.width * .44,
+                              hintText: 'Enter your first name',
+                              labelText: 'First name',
+                              textEditingController: _firstNameController,
+                              validator: validator,
+                              suffixIcon:
+                                  const Icon(CupertinoIcons.person_fill),
+                            ),
+                            AuthInputWidget(
+                              width: MediaQuery.of(context).size.width * .44,
+                              hintText: 'Enter your last name',
+                              labelText: 'Last name',
+                              textEditingController: _lastNameController,
+                              validator: validator,
+                              suffixIcon:
+                                  const Icon(CupertinoIcons.person_fill),
+                            ),
+                          ],
+                        ),
+                        AuthInputWidget(
+                          hintText: 'Enter your email',
+                          labelText: 'Email',
+                          textEditingController: _emailController,
+                          validator: emailValidator,
+                          suffixIcon: const Icon(CupertinoIcons.mail_solid),
+                        ),
+                        AuthInputWidget(
+                          hintText: 'Enter your password',
+                          labelText: 'Password',
+                          textEditingController: _passwordController,
+                          obscureText: hidePassword,
+                          suffixIcon: const Icon(
+                            CupertinoIcons.lock_fill,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              hidePassword = !hidePassword;
+                            });
+                          },
+                          validator: passwordValidator,
+                        ),
+                        AuthInputWidget(
+                          hintText: 'Confirm your password',
+                          labelText: 'Confirm password',
+                          textEditingController: _confirmPasswordController,
+                          obscureText: hideConfirmPassword,
+                          onPressed: () {
+                            setState(() {
+                              hideConfirmPassword = !hideConfirmPassword;
+                            });
+                          },
+                          suffixIcon: const Icon(
+                            CupertinoIcons.lock_fill,
+                          ),
+                          validator: passwordValidator,
                         ),
                         const SizedBox(
-                          width: 10,
+                          height: 40,
                         ),
-                        Text(
-                          'Get Started',
-                          style: AppTheme.darkThemeData.textTheme.displayLarge,
+                        ButtonWidget(
+                          buttonText: 'Next',
+                          isLoading: state.runtimeType == AuthLoading,
+                          onPressed: () {
+                            context.read<AuthBloc>().add(
+                                  AuthSignup(
+                                    firstname: _firstNameController.text,
+                                    lastname: _lastNameController.text,
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  ),
+                                );
+                          },
+                          isActive: isActive,
                         ),
                       ],
                     ),
-
-                    const SizedBox(
-                      height: 8,
-                    ),
-
-                    Text(
-                      'Unleash your creativity, sign up now to start sharing your stories and exploring new perspectives.',
-                      style: AppTheme.darkThemeData.textTheme.displaySmall!
-                          .copyWith(
-                        color: AppPallete.grayLight,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-
-                    //form
-                    Form(
-                      key: _formKey,
-                      child: Column(
+                  ),
+                  const SizedBox(
+                    height: 45,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const SignInView();
+                          },
+                        ),
+                      );
+                    },
+                    child: RichText(
+                      text: const TextSpan(
                         children: [
-                          AuthInputWidget(
-                            hintText: 'Enter your first name',
-                            labelText: 'First name',
-                            textEditingController: _firstNameController,
-                            validator: validator,
-                          ),
-                          AuthInputWidget(
-                            hintText: 'Enter your last name',
-                            labelText: 'Last name',
-                            textEditingController: _lastNameController,
-                            validator: validator,
-                          ),
-                          AuthInputWidget(
-                            hintText: 'Enter your email',
-                            labelText: 'Email',
-                            textEditingController: _emailController,
-                            validator: emailValidator,
-                          ),
-                          AuthInputWidget(
-                            hintText: 'Enter your password',
-                            labelText: 'Password',
-                            textEditingController: _passwordController,
-                            obscureText: true,
-                            suffixIcon: const Icon(
-                              Icons.remove_red_eye,
+                          TextSpan(
+                            text: 'Already have an account? ',
+                            style: TextStyle(
+                              color: AppPallete.grayLight,
                             ),
-                            validator: passwordValidator,
                           ),
-                          AuthInputWidget(
-                            hintText: 'Confirm your password',
-                            labelText: 'Confirm password',
-                            textEditingController: _confirmPasswordController,
-                            obscureText: true,
-                            suffixIcon: const Icon(
-                              Icons.remove_red_eye,
+                          TextSpan(
+                            text: 'Sign In',
+                            style: TextStyle(
+                              color: AppPallete.primaryColor,
+                              fontWeight: FontWeight.w500,
                             ),
-                            validator: passwordValidator,
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          ButtonWidget(
-                            buttonText: 'Next',
-                            isLoading: state.runtimeType == AuthLoading,
-                            onPressed: () {
-                              context.read<AuthBloc>().add(
-                                    AuthSignup(
-                                      firstname: _firstNameController.text,
-                                      lastname: _lastNameController.text,
-                                      email: _emailController.text,
-                                      password: _passwordController.text,
-                                    ),
-                                  );
-                            },
-                            isActive: isActive,
-                          ),
+                          )
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 45,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const SignInView();
-                            },
-                          ),
-                        );
-                      },
-                      child: RichText(
-                        text: const TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Already have an account? ',
-                              style: TextStyle(
-                                color: AppPallete.grayLight,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Sign In',
-                              style: TextStyle(
-                                color: AppPallete.primaryColor,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
           ),

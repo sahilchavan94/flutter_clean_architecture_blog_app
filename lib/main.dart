@@ -1,8 +1,7 @@
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:blog_app/features/auth/presentation/pages/signin_view.dart';
-// import 'package:blog_app/features/auth/presentation/pages/signup_view.dart';
+import 'package:blog_app/features/auth/presentation/pages/signup_view.dart';
 import 'package:blog_app/features/blog/presentation/pages/blog_home.dart';
 import 'package:blog_app/firebase_options.dart';
 import 'package:blog_app/init_dependencies.dart';
@@ -57,7 +56,7 @@ class _MyAppState extends State<MyApp> {
           if (isFetched) {
             return const BlogHome();
           }
-          return const SignInView();
+          return const SignUpView();
         },
       ),
     );

@@ -5,17 +5,20 @@ class UserEntity {
   final String firstname;
   final String lastname;
   final String email;
+  final List<String> interestedCategories;
 
   UserEntity({
     required this.firstname,
     required this.lastname,
     required this.email,
+    required this.interestedCategories,
   });
 
   factory UserEntity.toEntity(UserModel userModel) => UserEntity(
         firstname: userModel.firstname,
         lastname: userModel.lastname,
         email: userModel.email,
+        interestedCategories: userModel.interestedCategories,
       );
 
   // Map<String, dynamic> toJson() => {

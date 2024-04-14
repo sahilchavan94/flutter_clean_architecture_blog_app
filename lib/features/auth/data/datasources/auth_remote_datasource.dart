@@ -18,6 +18,7 @@ abstract interface class AuthRemoteDataSource {
     String password,
   );
   Future<UserModel> getCurrentUserData();
+  Future<String?> updateCurrentUserInterests(List<String> interestedCategories);
   Future<void> signOut();
 }
 
@@ -89,11 +90,28 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         password: password,
       );
 
-      //if the si
       if (res.user == null) {
         throw const ServerException(error: "Failed to sign in");
       }
       return res;
+    } catch (e) {
+      throw ServerException(error: e.toString());
+    }
+  }
+
+  @override
+  Future<String?> updateCurrentUserInterests(
+      List<String> interestedCategories) async {
+    try {
+      if (firebaseAuth.currentUser == null) {
+        throw const ServerException(error: "User not logged in");
+      }
+      return await firebaseDatabase
+          .ref("users")
+          .child(firebaseAuth.currentUser!.uid)
+          .update({
+        'interested_categories': interestedCategories,
+      }).then((value) => "User interests are updated");
     } catch (e) {
       throw ServerException(error: e.toString());
     }

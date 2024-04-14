@@ -11,4 +11,5 @@ class AppPallete {
   static const Color deactivatedTextColor = Color(0XFF6B6B6B);
   static const Color primaryColor = Color(0XFF52FF00);
   static const Color errorColor = Color(0XFFFF6C6C);
+  static const Color inputTextColor = Color.fromARGB(255, 210, 209, 209);
 }

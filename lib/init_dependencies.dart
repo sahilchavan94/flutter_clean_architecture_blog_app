@@ -7,6 +7,7 @@ import 'package:blog_app/features/auth/domain/usecases/get_user.dart';
 import 'package:blog_app/features/auth/domain/usecases/sign_in.dart';
 import 'package:blog_app/features/auth/domain/usecases/sign_out.dart';
 import 'package:blog_app/features/auth/domain/usecases/sign_up.dart';
+import 'package:blog_app/features/auth/domain/usecases/update_user_interests.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -60,12 +61,18 @@ void _initAuth() {
       ),
     )
     ..registerFactory(
+      () => UpdateCurrentUserInterests(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
       () => SignOut(
         serviceLocator(),
       ),
     )
     ..registerLazySingleton(
       () => AuthBloc(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

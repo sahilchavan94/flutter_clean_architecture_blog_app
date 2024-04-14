@@ -27,4 +27,9 @@ class AuthSignIn extends AuthEvent {
   );
 }
 
+class AuthUpdateUserInterest extends AuthEvent {
+  final List<String> selectedCategories;
+  AuthUpdateUserInterest({required this.selectedCategories});
+}
+
 class AuthSignOut extends AuthEvent {}

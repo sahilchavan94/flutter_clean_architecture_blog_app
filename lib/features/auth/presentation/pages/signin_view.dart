@@ -1,4 +1,6 @@
+import 'package:blog_app/core/strings/strings.dart';
 import 'package:blog_app/features/blog/presentation/pages/blog_home.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
@@ -21,6 +23,7 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isActive = false;
+  bool hidePassword = true;
 
   @override
   void initState() {
@@ -38,7 +41,10 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
 
   void _updateActive() {
     setState(() {
-      isActive = _formKey.currentState!.validate();
+      if (_emailController.text.isNotEmpty &&
+          _passwordController.text.isNotEmpty) {
+        isActive = _formKey.currentState!.validate();
+      }
     });
   }
 
@@ -73,9 +79,9 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
       builder: (context, state) {
         return Scaffold(
           body: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 40.0,
-              vertical: 100,
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: MediaQuery.of(context).size.height * .1,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -104,11 +110,11 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
                 ),
 
                 Text(
-                  'Welcome back, please enter your credentials to access your personalized content and blogs',
+                  AppStrings.signInString,
                   style:
                       AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
                     color: AppPallete.grayLight,
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight: FontWeight.w300,
                   ),
                 ),
@@ -123,14 +129,22 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
                         labelText: 'Email',
                         textEditingController: _emailController,
                         validator: emailValidator,
+                        suffixIcon: const Icon(
+                          CupertinoIcons.mail_solid,
+                        ),
                       ),
                       AuthInputWidget(
                         hintText: 'Enter your password',
                         labelText: 'Password',
                         textEditingController: _passwordController,
-                        obscureText: true,
+                        obscureText: hidePassword,
+                        onPressed: () {
+                          setState(() {
+                            hidePassword = !hidePassword;
+                          });
+                        },
                         suffixIcon: const Icon(
-                          Icons.remove_red_eye,
+                          CupertinoIcons.lock_fill,
                         ),
                         validator: passwordValidator,
                       ),

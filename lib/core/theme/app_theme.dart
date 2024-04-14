@@ -6,6 +6,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppPallete.scaffoldBackGroundColor,
     appBarTheme: const AppBarTheme(
       color: AppPallete.scaffoldBackGroundColor,
+      elevation: 0,
     ),
 
     //text theme
@@ -15,16 +16,19 @@ class AppTheme {
         fontSize: 28,
         fontWeight: FontWeight.w500,
         letterSpacing: .1,
+        fontFamily: 'Inter',
       ),
       //display medium
       displayMedium: TextStyle(
         fontSize: 14.5,
         fontWeight: FontWeight.w400,
+        fontFamily: 'Inter',
       ),
       //display small
       displaySmall: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
+        fontFamily: 'Inter',
       ),
     ),
 
@@ -49,40 +53,48 @@ class AppTheme {
 
     //input theme
     inputDecorationTheme: InputDecorationTheme(
-        hintStyle: const TextStyle(
-          color: AppPallete.grayLight,
+      hintStyle: const TextStyle(
+        color: AppPallete.grayLight,
+      ),
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: 9,
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(5),
+        borderSide: const BorderSide(
+          color: AppPallete.grayDark,
         ),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 9,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(5),
+        borderSide: const BorderSide(
+          color: AppPallete.grayDark,
         ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
-          borderSide: const BorderSide(
-            color: AppPallete.grayDark,
-          ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(5),
+        borderSide: const BorderSide(
+          color: AppPallete.grayDark,
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
-          borderSide: const BorderSide(
-            color: AppPallete.grayDark,
-          ),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(5),
+        borderSide: const BorderSide(
+          color: AppPallete.grayDark,
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
-          borderSide: const BorderSide(
-            color: AppPallete.grayDark,
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
-          borderSide: const BorderSide(
-            color: AppPallete.grayDark,
-          ),
-        ),
-        errorStyle: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-          color: AppPallete.errorColor,
-        )),
+      ),
+      errorStyle: const TextStyle(
+        fontSize: 14,
+        height: .4,
+        fontWeight: FontWeight.w400,
+        color: AppPallete.errorColor,
+      ),
+      helperStyle: const TextStyle(
+        fontSize: 14,
+        height: .4,
+        fontWeight: FontWeight.w400,
+        color: AppPallete.grayLight,
+      ),
+    ),
   );
 }

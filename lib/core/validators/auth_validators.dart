@@ -4,7 +4,7 @@ mixin AuthValidators {
     final regExp = RegExp(pattern);
 
     if (value!.isEmpty) {
-      return 'Enter an email';
+      return 'Enter an email *';
     } else if (!regExp.hasMatch(
       value.toString().trim(),
     )) {
@@ -24,14 +24,11 @@ mixin AuthValidators {
 
   String? passwordValidator(value) {
     validator(value);
-    const pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{6,}$';
-    final regExp = RegExp(pattern);
 
     if (value!.isEmpty) {
-      return 'Enter password';
-    } else if (!regExp.hasMatch(value)) {
-      return 'Password must be of length 6 \nwith at least 1 uppercase letter\nwith at least 1 lowercase letter\nwith at least 1 number\nand at least 1 special character *';
+      return 'Enter password *';
+    } else if (value.length < 6) {
+      return 'Password must be of length 6 *';
     } else {
       return null;
     }

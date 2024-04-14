@@ -9,6 +9,7 @@ import 'package:blog_app/features/auth/domain/entities/user_entity.dart';
 import 'package:blog_app/features/auth/domain/usecases/get_user.dart';
 import 'package:blog_app/features/auth/domain/usecases/sign_in.dart';
 import 'package:blog_app/features/auth/domain/usecases/sign_out.dart';
+import 'package:blog_app/features/auth/domain/usecases/update_user_interests.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
@@ -23,6 +24,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final GetUser getUser;
   final SignOut signOut;
   final CurrentUserCubit currentUserCubit;
+  final UpdateCurrentUserInterests updateCurrentUserInterests;
 
   AuthBloc(
     this.signUp,
@@ -30,12 +32,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     this.currentUserCubit,
     this.getUser,
     this.signOut,
+    this.updateCurrentUserInterests,
   ) : super(AuthInitial()) {
     on<AuthEvent>((_, emit) => emit(AuthLoading()));
     on<AuthSignup>(_authSignUp);
     on<AuthSignIn>(_authSignIn);
     on<AuthIsUserLoggedIn>(_isUserLoggedIn);
     on<AuthSignOut>(_authSignOut);
+    on<AuthUpdateUserInterest>(_authUpdateUserInterest);
   }
 
   FutureOr<void> _isUserLoggedIn(
@@ -89,6 +93,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         //update the state
         emit(AuthSignedOut());
       });
+    } on ServerException catch (e) {
+      emit(AuthFailure(e.error));
+    }
+  }
+
+  FutureOr<void> _authUpdateUserInterest(
+      AuthUpdateUserInterest event, Emitter<AuthState> emit) async {
+    try {
+      final response =
+          await updateCurrentUserInterests.call(event.selectedCategories);
+      response.fold(
+        (l) => emit(AuthFailure(l.message)),
+        (r) {
+          emit(AuthSuccess());
+        },
+      );
     } on ServerException catch (e) {
       emit(AuthFailure(e.error));
     }

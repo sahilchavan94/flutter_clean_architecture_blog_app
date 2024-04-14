@@ -56,4 +56,15 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(Failure(e.error));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> updateCurrentUserInterests(
+      List<String> selectedCategories) async {
+    try {
+      await authRemoteDataSource.updateCurrentUserInterests(selectedCategories);
+      return right("User logged out");
+    } on ServerException catch (e) {
+      return left(Failure(e.error));
+    }
+  }
 }

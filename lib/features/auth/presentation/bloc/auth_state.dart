@@ -9,6 +9,8 @@ final class AuthLoading extends AuthState {}
 
 final class AuthSuccess extends AuthState {}
 
+final class AuthUpdatedUserIn extends AuthState {}
+
 final class AuthFailure extends AuthState {
   final String message;
   AuthFailure(this.message);
