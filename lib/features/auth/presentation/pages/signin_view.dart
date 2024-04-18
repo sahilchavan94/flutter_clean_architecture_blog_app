@@ -61,13 +61,13 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
           );
         }
         if (state is AuthSuccess) {
+          context.read<AuthBloc>().add(AuthIsUserLoggedIn());
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               duration: Duration(milliseconds: 1500),
               content: Text('Logged into account'),
             ),
           );
-          context.read<AuthBloc>().add(AuthIsUserLoggedIn());
           Navigator.push(
             context,
             MaterialPageRoute(

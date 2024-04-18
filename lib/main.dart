@@ -1,13 +1,13 @@
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
-import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/signup_view.dart';
 import 'package:blog_app/features/blog/presentation/pages/blog_home.dart';
-import 'package:blog_app/firebase_options.dart';
+import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/init_dependencies.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:blog_app/firebase_options.dart';
+import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

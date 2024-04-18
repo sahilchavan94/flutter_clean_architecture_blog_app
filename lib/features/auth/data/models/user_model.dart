@@ -2,7 +2,7 @@ class UserModel {
   final String firstname;
   final String lastname;
   final String email;
-  final List<String> interestedCategories;
+  final List interestedCategories;
 
   UserModel({
     required this.firstname,
@@ -12,10 +12,11 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-      firstname: json['firstname'] ?? '',
-      lastname: json['lastname'] ?? '',
-      email: json['email'] ?? '',
-      interestedCategories: json['interested_categories'] ?? []);
+        firstname: json['firstname'] ?? '',
+        lastname: json['lastname'] ?? '',
+        email: json['email'] ?? '',
+        interestedCategories: json['interested_categories'] ?? [],
+      );
 
   Map<String, dynamic> toJson() => {
         'firstname': firstname,

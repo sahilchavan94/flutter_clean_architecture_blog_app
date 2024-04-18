@@ -12,4 +12,6 @@ class AppPallete {
   static const Color primaryColor = Color(0XFF52FF00);
   static const Color errorColor = Color(0XFFFF6C6C);
   static const Color inputTextColor = Color.fromARGB(255, 210, 209, 209);
+  static const Color tabLabelUnselectedColor = Color(0XFF9A9A9A);
+  static const Color tabLabelSelectedColor = Color(0XFFF5F5F5);
 }

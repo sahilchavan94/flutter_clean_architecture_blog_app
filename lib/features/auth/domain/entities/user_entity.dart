@@ -5,7 +5,7 @@ class UserEntity {
   final String firstname;
   final String lastname;
   final String email;
-  final List<String> interestedCategories;
+  final List interestedCategories;
 
   UserEntity({
     required this.firstname,

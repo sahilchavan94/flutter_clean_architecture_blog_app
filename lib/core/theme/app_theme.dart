@@ -31,13 +31,11 @@ class AppTheme {
         fontFamily: 'Inter',
       ),
     ),
-
     textSelectionTheme: const TextSelectionThemeData(
       cursorColor: AppPallete.grayLight,
       selectionColor: AppPallete.grayLight,
       selectionHandleColor: AppPallete.grayLabel,
     ),
-
     snackBarTheme: const SnackBarThemeData(
       closeIconColor: AppPallete.errorColor,
       showCloseIcon: true,
@@ -95,6 +93,24 @@ class AppTheme {
         fontWeight: FontWeight.w400,
         color: AppPallete.grayLight,
       ),
+    ),
+
+    //tab bar theme
+    tabBarTheme: const TabBarTheme(
+      indicatorColor: AppPallete.primaryColor,
+      indicatorSize: TabBarIndicatorSize.label,
+      labelPadding: EdgeInsets.symmetric(
+        vertical: 15,
+      ),
+      labelStyle: TextStyle(
+        fontSize: 16,
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontSize: 16,
+      ),
+      unselectedLabelColor: AppPallete.tabLabelUnselectedColor,
+      labelColor: AppPallete.tabLabelSelectedColor,
+      dividerHeight: 0,
     ),
   );
 }
