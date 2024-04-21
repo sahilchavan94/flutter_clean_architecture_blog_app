@@ -41,7 +41,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, UserEntity>> getCurrentUserData() async {
     try {
       final response = await authRemoteDataSource.getCurrentUserData();
-      return right(UserEntity.toEntity(response));
+      return right(response);
     } on ServerException catch (e) {
       return left(Failure(e.error));
     }

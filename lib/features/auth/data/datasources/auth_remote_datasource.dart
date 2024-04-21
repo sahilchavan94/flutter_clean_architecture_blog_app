@@ -72,6 +72,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         'firstname': firstname.toLowerCase(),
         'lastname': lastname.toLowerCase(),
         'email': email.toLowerCase(),
+        'uid': firebaseAuth.currentUser!.uid,
+        'profile_image_url': "",
       });
 
       return res;

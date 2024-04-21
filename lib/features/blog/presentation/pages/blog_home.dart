@@ -1,7 +1,11 @@
+import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
+import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/strings/strings.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
+import 'package:blog_app/features/profile/presentation/pages/profile_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BlogHome extends StatefulWidget {
   const BlogHome({super.key});
@@ -66,8 +70,24 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
             icon: const Icon(Icons.add_circle),
           ),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileView(),
+                ),
+              );
+            },
+            icon: CustomImageView(
+              width: 24,
+              height: 24,
+              fit: BoxFit.cover,
+              radius: BorderRadius.circular(20),
+              imagePath: (context.read<CurrentUserCubit>().state
+                      as CurrentUserDataFetched)
+                  .userEntity
+                  .profileImageUrl,
+            ),
           ),
         ],
       ),

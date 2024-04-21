@@ -29,7 +29,7 @@ class _SelectInterestsState extends State<SelectInterests> {
               content: Text('Updated user categories'),
             ),
           );
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => const BlogHome(),

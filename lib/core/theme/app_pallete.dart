@@ -14,4 +14,5 @@ class AppPallete {
   static const Color inputTextColor = Color.fromARGB(255, 210, 209, 209);
   static const Color tabLabelUnselectedColor = Color(0XFF9A9A9A);
   static const Color tabLabelSelectedColor = Color(0XFFF5F5F5);
+  static const Color bottomSheetColor = Color(0XFF111111);
 }

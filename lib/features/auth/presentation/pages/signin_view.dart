@@ -68,7 +68,7 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
               content: Text('Logged into account'),
             ),
           );
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => const BlogHome(),

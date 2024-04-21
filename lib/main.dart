@@ -3,6 +3,7 @@ import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/signup_view.dart';
 import 'package:blog_app/features/blog/presentation/pages/blog_home.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
+import 'package:blog_app/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:blog_app/init_dependencies.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,9 +20,15 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(
+          lazy: false,
           create: (_) => serviceLocator<AuthBloc>(),
         ),
         BlocProvider(
+          lazy: false,
+          create: (_) => serviceLocator<ProfileBloc>(),
+        ),
+        BlocProvider(
+          lazy: false,
           create: (_) => serviceLocator<CurrentUserCubit>(),
         ),
       ],

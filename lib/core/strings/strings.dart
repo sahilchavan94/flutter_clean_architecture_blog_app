@@ -7,4 +7,6 @@ class AppStrings {
       'Ready to explore, choose your interests below, and let\'s dive into a world tailored just for you! Click away and let the adventure begin!';
   static const homePageString =
       'Discover, engage, and explore. Your gateway to limitless blogging adventures opens here.';
+  static const personalInterestString =
+      'Set your interests for getting relevant content for reading';
 }

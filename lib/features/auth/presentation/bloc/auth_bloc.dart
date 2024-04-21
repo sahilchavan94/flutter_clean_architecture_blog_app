@@ -6,25 +6,25 @@ import 'package:bloc/bloc.dart';
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/features/auth/domain/entities/user_entity.dart';
-import 'package:blog_app/features/auth/domain/usecases/get_user.dart';
-import 'package:blog_app/features/auth/domain/usecases/sign_in.dart';
-import 'package:blog_app/features/auth/domain/usecases/sign_out.dart';
-import 'package:blog_app/features/auth/domain/usecases/update_user_interests.dart';
+import 'package:blog_app/features/auth/domain/usecases/get_user_usecase.dart';
+import 'package:blog_app/features/auth/domain/usecases/sign_in_usecase.dart';
+import 'package:blog_app/features/auth/domain/usecases/sign_out_usecase.dart';
+import 'package:blog_app/features/auth/domain/usecases/update_user_interests_usecase.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
-import 'package:blog_app/features/auth/domain/usecases/sign_up.dart';
+import 'package:blog_app/features/auth/domain/usecases/sign_up_usecase.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final SignUp signUp;
-  final SignIn signIn;
-  final GetUser getUser;
-  final SignOut signOut;
+  final SignUpUseCase signUp;
+  final SignInUseCase signIn;
+  final GetUserUseCase getUser;
+  final SignOutUseCase signOut;
   final CurrentUserCubit currentUserCubit;
-  final UpdateCurrentUserInterests updateCurrentUserInterests;
+  final UpdateCurrentUserInterestsUseCase updateCurrentUserInterests;
 
   AuthBloc(
     this.signUp,
