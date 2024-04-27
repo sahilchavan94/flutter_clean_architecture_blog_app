@@ -1,6 +1,7 @@
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/signup_view.dart';
+import 'package:blog_app/features/blog/presentation/managers/edit_blog_manager.dart';
 import 'package:blog_app/features/blog/presentation/pages/blog_home.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/profile/presentation/bloc/profile_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blog_app/firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,12 +26,14 @@ void main() async {
           create: (_) => serviceLocator<AuthBloc>(),
         ),
         BlocProvider(
-          lazy: false,
           create: (_) => serviceLocator<ProfileBloc>(),
         ),
         BlocProvider(
           lazy: false,
           create: (_) => serviceLocator<CurrentUserCubit>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => serviceLocator<EditBlogManager>(),
         ),
       ],
       child: const MyApp(),

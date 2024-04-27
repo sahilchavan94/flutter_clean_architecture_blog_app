@@ -3,6 +3,7 @@ import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/strings/strings.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
+import 'package:blog_app/features/blog/presentation/pages/add_new_blog.dart';
 import 'package:blog_app/features/profile/presentation/pages/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,7 +67,14 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AddNewBlog(),
+                ),
+              );
+            },
             icon: const Icon(Icons.add_circle),
           ),
           IconButton(

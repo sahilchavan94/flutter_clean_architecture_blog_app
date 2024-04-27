@@ -15,7 +15,9 @@ class _ProfileViewState extends State<ProfileView> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Profile'),
+        title: const Text(
+          'Profile',
+        ),
         actions: <Widget>[
           IconButton(
             onPressed: () {},

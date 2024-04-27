@@ -1,7 +1,9 @@
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
+import 'package:blog_app/core/lists/category_list.dart';
 import 'package:blog_app/core/strings/strings.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
+import 'package:blog_app/core/utils/reduce_alpha.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,34 +47,33 @@ class _PersonalInterestsWidgetState extends State<PersonalInterestsWidget> {
           height: 15,
         ),
         Wrap(
-          spacing: 10,
-          runSpacing: 10,
+          spacing: 7,
+          runSpacing: -6,
           runAlignment: WrapAlignment.center,
           children: List.generate(
             list.length,
-            (index) => Container(
-              height: 44,
-              width: MediaQuery.of(context).size.width * .285,
-              decoration: BoxDecoration(
-                color: AppPallete.bottomSheetColor,
-                border: Border.all(color: Colors.white, width: .2),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  list[index],
-                  maxLines: 1,
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.center,
-                  style:
-                      AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
-                    fontWeight: FontWeight.w400,
-                  ),
+            (index) => Chip(
+              padding: const EdgeInsets.all(1),
+              labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+              label: Text(
+                list[index],
+                style: TextStyle(
+                  color: CategoryList
+                      .categoryColors[CategoryList.blogCategories[index]],
                 ),
+              ),
+              side: BorderSide.none,
+              surfaceTintColor: ColorManipulation.reduceAlpha(
+                CategoryList
+                    .categoryColors[CategoryList.blogCategories[index]]!,
+              ),
+              backgroundColor: ColorManipulation.reduceAlpha(
+                CategoryList
+                    .categoryColors[CategoryList.blogCategories[index]]!,
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

@@ -5,6 +5,7 @@ import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/core/utils/pick_image.dart';
+import 'package:blog_app/core/utils/show_bottom_sheet_to_pick_image.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,6 +71,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
         return Column(
           children: [
             Stack(
+              clipBehavior: Clip.none,
               children: [
                 state.runtimeType == ProfileLoading
                     ? Container(
@@ -79,9 +81,12 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                         ),
                         width: 100,
                         height: 100,
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            color: AppPallete.deactivatedBackgroundColor,
+                        child: Center(
+                          child: LinearProgressIndicator(
+                            borderRadius: BorderRadius.circular(50),
+                            minHeight: double.maxFinite,
+                            color: Colors.black12,
+                            backgroundColor: Colors.grey.shade900,
                           ),
                         ),
                       )
@@ -93,112 +98,30 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                         imagePath: currentUserData.userEntity.profileImageUrl,
                       ),
                 Positioned(
-                  bottom: -10,
-                  right: 2,
+                  bottom: -18,
+                  right: -3,
                   child: IconButton(
                     onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        showDragHandle: true,
-                        backgroundColor: AppPallete.bottomSheetColor,
-                        constraints: BoxConstraints.expand(
-                          height: MediaQuery.of(context).size.height * .25,
-                        ),
-                        builder: (context) {
-                          return Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  'Upload profile photo',
-                                  style: AppTheme
-                                      .darkThemeData.textTheme.displayLarge!
-                                      .copyWith(
-                                    color: AppPallete.grayLabel,
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 25,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    selectImage(
-                                      ImageSource.gallery,
-                                      currentUserData.userEntity.uid,
-                                    );
-                                  },
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        CupertinoIcons.photo_fill,
-                                        color: AppPallete.grayLabel,
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        'Gallery',
-                                        style: AppTheme.darkThemeData.textTheme
-                                            .displayLarge!
-                                            .copyWith(
-                                          color: AppPallete.grayLabel,
-                                          fontSize: 16,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                const Divider(),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    selectImage(
-                                      ImageSource.camera,
-                                      currentUserData.userEntity.uid,
-                                    );
-                                  },
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.camera_alt,
-                                        color: AppPallete.grayLabel,
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        'Camera',
-                                        style: AppTheme.darkThemeData.textTheme
-                                            .displayLarge!
-                                            .copyWith(
-                                          color: AppPallete.grayLabel,
-                                          fontSize: 16,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                      showBottomSheetToPickImage(
+                        context,
+                        () {
+                          selectImage(
+                            ImageSource.gallery,
+                            currentUserData.userEntity.uid,
+                          );
+                        },
+                        () {
+                          selectImage(
+                            ImageSource.camera,
+                            currentUserData.userEntity.uid,
                           );
                         },
                       );
                     },
-                    icon: const Icon(Icons.camera_alt),
+                    icon: const Icon(
+                      CupertinoIcons.camera_fill,
+                      color: Colors.white,
+                    ),
                     iconSize: 25,
                   ),
                 )
@@ -210,7 +133,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
               height: 5,
             ),
             Text(
-              '${currentUserData.userEntity.firstname} ${currentUserData.userEntity.lastname}',
+              '${currentUserData.userEntity.firstname.capitalize()} ${currentUserData.userEntity.lastname.capitalize()}',
               style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
                 fontSize: 24,
                 fontWeight: FontWeight.w400,
@@ -229,5 +152,11 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
         );
       },
     );
+  }
+}
+
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   }
 }

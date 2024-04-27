@@ -9,6 +9,7 @@ import 'package:blog_app/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:blog_app/features/auth/domain/usecases/sign_up_usecase.dart';
 import 'package:blog_app/features/auth/domain/usecases/update_user_interests_usecase.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:blog_app/features/blog/presentation/managers/edit_blog_manager.dart';
 import 'package:blog_app/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:blog_app/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:blog_app/features/profile/domain/repositories/profile_repository.dart';
@@ -42,6 +43,7 @@ Future<void> initDependencies() async {
 
   _initAuth();
   _initProfile();
+  _initBlog();
 }
 
 void _initAuth() {
@@ -123,4 +125,10 @@ void _initProfile() {
         serviceLocator(),
       ),
     );
+}
+
+void _initBlog() {
+  serviceLocator.registerLazySingleton(
+    () => EditBlogManager(),
+  );
 }

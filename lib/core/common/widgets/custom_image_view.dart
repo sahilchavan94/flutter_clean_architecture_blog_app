@@ -99,19 +99,29 @@ class CustomImageView extends StatelessWidget {
             height: height,
             width: width,
             fit: fit,
-            imageUrl: imagePath!,
+            imageUrl: imagePath!.isEmpty
+                ? "https://www.gokulagro.com/wp-content/uploads/2023/01/no-images.png"
+                : imagePath!,
             color: color,
-            placeholder: (context, url) => Container(
+            placeholder: (context, url) => SizedBox(
               height: 30,
               width: 30,
               child: LinearProgressIndicator(
-                color: Colors.grey.shade200,
-                backgroundColor: Colors.grey.shade100,
+                color: Colors.black12,
+                backgroundColor: Colors.grey.shade900,
               ),
             ),
-            errorWidget: (context, url, error) => Icon(
-              Icons.person,
-              size: width,
+            errorWidget: (context, url, error) => Container(
+              height: height,
+              width: width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(60),
+                color: Colors.grey.shade200,
+              ),
+              child: const Icon(
+                Icons.image,
+                size: 30,
+              ),
             ),
           );
         case ImageType.png:
@@ -131,7 +141,7 @@ class CustomImageView extends StatelessWidget {
 
 extension ImageTypeExtension on String {
   ImageType get imageType {
-    if (this.startsWith('http') || this.startsWith('https')) {
+    if (this.startsWith('http') || this.startsWith('https') || this.isEmpty) {
       return ImageType.network;
     } else if (this.endsWith('.svg')) {
       return ImageType.svg;

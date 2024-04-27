@@ -1,34 +1,40 @@
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static ThemeData darkThemeData = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: AppPallete.scaffoldBackGroundColor,
-    appBarTheme: const AppBarTheme(
+
+    appBarTheme: AppBarTheme(
       color: AppPallete.scaffoldBackGroundColor,
       elevation: 0,
+      titleTextStyle: const TextStyle().copyWith(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontSize: 23,
+      ),
     ),
 
     //text theme
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
       //display large
       displayLarge: TextStyle(
-        fontSize: 28,
+        fontSize: 25,
         fontWeight: FontWeight.w500,
         letterSpacing: .1,
-        fontFamily: 'Inter',
+        fontFamily: GoogleFonts.nunito().fontFamily,
       ),
       //display medium
       displayMedium: TextStyle(
         fontSize: 14.5,
         fontWeight: FontWeight.w400,
-        fontFamily: 'Inter',
+        fontFamily: GoogleFonts.nunito().fontFamily,
       ),
       //display small
       displaySmall: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        fontFamily: 'Inter',
+        fontFamily: GoogleFonts.nunito().fontFamily,
       ),
     ),
     textSelectionTheme: const TextSelectionThemeData(
@@ -51,8 +57,9 @@ class AppTheme {
 
     //input theme
     inputDecorationTheme: InputDecorationTheme(
-      hintStyle: const TextStyle(
+      hintStyle: TextStyle(
         color: AppPallete.grayLight,
+        fontFamily: GoogleFonts.nunito().fontFamily,
       ),
       contentPadding: const EdgeInsets.symmetric(
         vertical: 9,
@@ -81,32 +88,36 @@ class AppTheme {
           color: AppPallete.grayDark,
         ),
       ),
-      errorStyle: const TextStyle(
+      errorStyle: TextStyle(
         fontSize: 14,
         height: .4,
         fontWeight: FontWeight.w400,
         color: AppPallete.errorColor,
+        fontFamily: GoogleFonts.nunito().fontFamily,
       ),
-      helperStyle: const TextStyle(
+      helperStyle: TextStyle(
         fontSize: 14,
         height: .4,
         fontWeight: FontWeight.w400,
         color: AppPallete.grayLight,
+        fontFamily: GoogleFonts.nunito().fontFamily,
       ),
     ),
 
     //tab bar theme
-    tabBarTheme: const TabBarTheme(
+    tabBarTheme: TabBarTheme(
       indicatorColor: AppPallete.primaryColor,
       indicatorSize: TabBarIndicatorSize.label,
-      labelPadding: EdgeInsets.symmetric(
+      labelPadding: const EdgeInsets.symmetric(
         vertical: 15,
       ),
       labelStyle: TextStyle(
         fontSize: 16,
+        fontFamily: GoogleFonts.nunito().fontFamily,
       ),
       unselectedLabelStyle: TextStyle(
         fontSize: 16,
+        fontFamily: GoogleFonts.nunito().fontFamily,
       ),
       unselectedLabelColor: AppPallete.tabLabelUnselectedColor,
       labelColor: AppPallete.tabLabelSelectedColor,
