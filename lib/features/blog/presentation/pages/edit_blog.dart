@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:blog_app/features/blog/presentation/widgets/edit_blog_widgets/add_blog_content.dart';
 import 'package:blog_app/features/blog/presentation/widgets/edit_blog_widgets/add_blog_images_widget.dart';
 import 'package:blog_app/features/blog/presentation/widgets/edit_blog_widgets/add_blog_info_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class _EditBlogState extends State<EditBlog> {
           children: [
             AddBlogImagesWidget(),
             AddBlogInfoWidget(),
+            AddBlogContentWidget(),
           ],
         ),
       ),

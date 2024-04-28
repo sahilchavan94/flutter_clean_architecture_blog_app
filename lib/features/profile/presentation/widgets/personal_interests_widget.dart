@@ -1,9 +1,8 @@
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
-import 'package:blog_app/core/lists/category_list.dart';
 import 'package:blog_app/core/strings/strings.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
-import 'package:blog_app/core/utils/reduce_alpha.dart';
+import 'package:blog_app/features/blog/presentation/widgets/blog_interests_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,34 +45,7 @@ class _PersonalInterestsWidgetState extends State<PersonalInterestsWidget> {
         const SizedBox(
           height: 15,
         ),
-        Wrap(
-          spacing: 7,
-          runSpacing: -6,
-          runAlignment: WrapAlignment.center,
-          children: List.generate(
-            list.length,
-            (index) => Chip(
-              padding: const EdgeInsets.all(1),
-              labelPadding: const EdgeInsets.symmetric(horizontal: 8),
-              label: Text(
-                list[index],
-                style: TextStyle(
-                  color: CategoryList
-                      .categoryColors[CategoryList.blogCategories[index]],
-                ),
-              ),
-              side: BorderSide.none,
-              surfaceTintColor: ColorManipulation.reduceAlpha(
-                CategoryList
-                    .categoryColors[CategoryList.blogCategories[index]]!,
-              ),
-              backgroundColor: ColorManipulation.reduceAlpha(
-                CategoryList
-                    .categoryColors[CategoryList.blogCategories[index]]!,
-              ),
-            ),
-          ),
-        ),
+        BlogInterestWrapper(list: list),
       ],
     );
   }

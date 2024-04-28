@@ -12,7 +12,7 @@ void showBottomSheetToPickImage(
       showDragHandle: true,
       backgroundColor: AppPallete.bottomSheetColor,
       constraints: BoxConstraints.expand(
-        height: MediaQuery.of(context).size.height * .265,
+        height: MediaQuery.of(context).size.height * .285,
       ),
       builder: (context) {
         return Padding(
@@ -28,7 +28,7 @@ void showBottomSheetToPickImage(
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 25,
               ),
               GestureDetector(
                 onTap: () {
