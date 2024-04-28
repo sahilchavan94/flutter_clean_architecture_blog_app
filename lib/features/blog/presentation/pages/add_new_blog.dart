@@ -1,4 +1,4 @@
-import 'package:blog_app/features/blog/presentation/pages/blog_peview.dart';
+import 'package:blog_app/features/blog/presentation/pages/blog_preview.dart';
 import 'package:blog_app/features/blog/presentation/pages/edit_blog.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +23,7 @@ class _AddNewBlogState extends State<AddNewBlog> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Upload Blog'),
+        centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(

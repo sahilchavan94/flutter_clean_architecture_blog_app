@@ -31,7 +31,7 @@ class _BlogPreviewState extends State<BlogPreview> {
             children: [
               //this stack will contain all the images
               Stack(
-                alignment: Alignment.bottomLeft,
+                alignment: Alignment.bottomCenter,
                 children: [
                   CarouselImageSlider(
                     imageList: editBlogManager.blogImageList,
@@ -47,7 +47,6 @@ class _BlogPreviewState extends State<BlogPreview> {
                           end: Alignment.topCenter,
                           colors: [
                             Color.fromRGBO(0, 0, 0, 1),
-                            Color.fromRGBO(0, 0, 0, .75),
                             Color.fromRGBO(0, 0, 0, 0),
                           ],
                         ),
