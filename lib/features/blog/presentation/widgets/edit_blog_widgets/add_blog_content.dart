@@ -20,7 +20,7 @@ class _AddBlogContentWidgetState extends State<AddBlogContentWidget> {
         return Column(
           children: [
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
             TextFormField(
               controller: editBlogManager.blogSubHeading,
@@ -48,7 +48,7 @@ class _AddBlogContentWidgetState extends State<AddBlogContentWidget> {
               maxLines: null,
             ),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
             TextFormField(
               controller: editBlogManager.blogContent,

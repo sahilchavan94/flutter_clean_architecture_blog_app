@@ -50,7 +50,7 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
               maxLines: null,
             ),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
 
             TextFormField(
@@ -88,51 +88,34 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
               onTap: () {
                 addBlogCategories(editBlogManager);
               },
-              child: editBlogManager.blogCategories.isNotEmpty
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Add relevant categories for your blog',
-                              style: AppTheme
-                                  .darkThemeData.textTheme.displayMedium!
-                                  .copyWith(
-                                color: AppPallete.grayLight,
-                              ),
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                  Icons.keyboard_arrow_down_outlined),
-                              color: AppPallete.grayLight,
-                              onPressed: () {
-                                addBlogCategories(editBlogManager);
-                              },
-                            ),
-                          ],
-                        ),
-                        BlogInterestWrapper(
-                          list: editBlogManager.blogCategories,
-                        ),
-                      ],
-                    )
-                  : const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Select blog categories',
-                          style: TextStyle(
-                            color: AppPallete.grayLight,
-                          ),
-                        ),
-                        Icon(
-                          Icons.keyboard_arrow_down_outlined,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Add relevant categories for your blog',
+                        style: AppTheme.darkThemeData.textTheme.displayMedium!
+                            .copyWith(
                           color: AppPallete.grayLight,
-                        )
-                      ],
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                        color: AppPallete.grayLight,
+                        onPressed: () {
+                          addBlogCategories(editBlogManager);
+                        },
+                      ),
+                    ],
+                  ),
+                  if (editBlogManager.blogCategories.isNotEmpty)
+                    BlogInterestWrapper(
+                      list: editBlogManager.blogCategories,
                     ),
+                ],
+              ),
             ),
           ],
         );
