@@ -3,7 +3,9 @@ import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/strings/strings.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
+import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/blog/presentation/pages/add_new_blog.dart';
+import 'package:blog_app/features/blog/presentation/widgets/top_blogs_widget.dart';
 import 'package:blog_app/features/profile/presentation/pages/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +22,7 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    context.read<AuthBloc>().add(AuthIsUserLoggedIn());
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -55,7 +58,7 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
               ],
             ),
             Text(
-              maxLines: 1,
+              textAlign: TextAlign.start,
               AppStrings.homePageString,
               style: AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
                 color: AppPallete.grayLight,
@@ -86,22 +89,34 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
                 ),
               );
             },
-            icon: CustomImageView(
-              width: 24,
-              height: 24,
-              fit: BoxFit.cover,
-              radius: BorderRadius.circular(20),
-              imagePath: (context.read<CurrentUserCubit>().state
-                      as CurrentUserDataFetched)
-                  .userEntity
-                  .profileImageUrl,
+            icon: BlocBuilder<CurrentUserCubit, CurrentUserState>(
+              builder: (context, state) {
+                if (state is CurrentUserDataFetched) {
+                  return CustomImageView(
+                    width: 24,
+                    height: 24,
+                    fit: BoxFit.cover,
+                    radius: BorderRadius.circular(20),
+                    imagePath: (context.read<CurrentUserCubit>().state
+                            as CurrentUserDataFetched)
+                        .userEntity
+                        .profileImageUrl,
+                  );
+                }
+                return const CircleAvatar(
+                  radius: 24,
+                  backgroundImage: NetworkImage(
+                    "https://www.gokulagro.com/wp-content/uploads/2023/01/no-images.png",
+                  ),
+                );
+              },
             ),
           ),
         ],
       ),
       body: Container(
         margin: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * .018,
+          top: MediaQuery.of(context).size.height * .006,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -118,13 +133,7 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
               child: TabBarView(
                 controller: _tabController,
                 children: const [
-                  SizedBox(
-                    width: double.maxFinite,
-                    height: double.maxFinite,
-                    child: Center(
-                      child: Text('This will contain the top blogs'),
-                    ),
-                  ),
+                  TopBlogsWidget(),
                   SizedBox(
                     width: double.maxFinite,
                     height: double.maxFinite,

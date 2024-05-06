@@ -147,7 +147,46 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                 color: AppPallete.tabLabelUnselectedColor,
                 height: 1,
               ),
-            )
+            ),
+
+            //show the uploaded blogs and other data
+            // const SizedBox(
+            //   height: 35,
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text(
+            //       "Blogs 27",
+            //       style:
+            //           AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
+            //         fontWeight: FontWeight.w400,
+            //         color: AppPallete.tabLabelUnselectedColor,
+            //         height: 1,
+            //       ),
+            //     ),
+            //     const SizedBox(
+            //       width: 30,
+            //     ),
+            //     Container(
+            //       height: 20,
+            //       width: 1,
+            //       color: AppPallete.tabLabelUnselectedColor,
+            //     ),
+            //     const SizedBox(
+            //       width: 30,
+            //     ),
+            //     Text(
+            //       "Likes 102",
+            //       style:
+            //           AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
+            //         fontWeight: FontWeight.w400,
+            //         color: AppPallete.tabLabelUnselectedColor,
+            //         height: 1,
+            //       ),
+            //     ),
+            //   ],
+            // )
           ],
         );
       },

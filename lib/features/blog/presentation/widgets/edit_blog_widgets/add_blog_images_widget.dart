@@ -49,7 +49,7 @@ class _AddImageWidgetState extends State<AddBlogImagesWidget> {
                   removePhoto: () {
                     editBlogManager.removeImageFromBlogImageList(0);
                   },
-                  width: MediaQuery.of(context).size.width * .48,
+                  width: MediaQuery.of(context).size.width * .55,
                   height: MediaQuery.of(context).size.height * .38,
                 ),
                 const SizedBox(
@@ -79,7 +79,7 @@ class _AddImageWidgetState extends State<AddBlogImagesWidget> {
                       removePhoto: () {
                         editBlogManager.removeImageFromBlogImageList(1);
                       },
-                      width: MediaQuery.of(context).size.width * .4,
+                      width: MediaQuery.of(context).size.width * .3,
                       height: MediaQuery.of(context).size.height * .18,
                     ),
                     const SizedBox(
@@ -107,7 +107,7 @@ class _AddImageWidgetState extends State<AddBlogImagesWidget> {
                       removePhoto: () {
                         editBlogManager.removeImageFromBlogImageList(2);
                       },
-                      width: MediaQuery.of(context).size.width * .4,
+                      width: MediaQuery.of(context).size.width * .3,
                       height: MediaQuery.of(context).size.height * .18,
                     ),
                   ],

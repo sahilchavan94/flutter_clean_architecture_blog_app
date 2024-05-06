@@ -1,4 +1,4 @@
 class Failure {
-  final String message;
+  final String? message;
   const Failure(this.message);
 }

@@ -10,33 +10,44 @@ class AppTheme {
       color: AppPallete.scaffoldBackGroundColor,
       elevation: 0,
       titleTextStyle: const TextStyle().copyWith(
-        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontFamily: GoogleFonts.roboto().fontFamily,
         fontSize: 23,
       ),
     ),
 
     //text theme
     textTheme: TextTheme(
+      headlineLarge: TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.w500,
+        letterSpacing: .1,
+        fontFamily: GoogleFonts.inter().fontFamily,
+      ),
       //display large
       displayLarge: TextStyle(
         fontSize: 25,
         fontWeight: FontWeight.w500,
         letterSpacing: .1,
-        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontFamily: GoogleFonts.inter().fontFamily,
       ),
       //display medium
       displayMedium: TextStyle(
         fontSize: 14.5,
         fontWeight: FontWeight.w400,
-        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontFamily: GoogleFonts.roboto().fontFamily,
       ),
       //display small
       displaySmall: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontFamily: GoogleFonts.roboto().fontFamily,
+      ),
+      titleLarge: TextStyle(
+        fontSize: 13.5,
+        fontFamily: GoogleFonts.openSans().fontFamily,
       ),
     ),
+
     textSelectionTheme: const TextSelectionThemeData(
       cursorColor: AppPallete.grayLight,
       selectionColor: AppPallete.grayLight,
@@ -55,11 +66,15 @@ class AppTheme {
       ),
     ),
 
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: AppPallete.primaryColor,
+    ),
+
     //input theme
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: TextStyle(
         color: AppPallete.grayLight,
-        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontFamily: GoogleFonts.roboto().fontFamily,
       ),
       contentPadding: const EdgeInsets.symmetric(
         vertical: 9,
@@ -93,14 +108,14 @@ class AppTheme {
         height: .4,
         fontWeight: FontWeight.w400,
         color: AppPallete.errorColor,
-        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontFamily: GoogleFonts.roboto().fontFamily,
       ),
       helperStyle: TextStyle(
         fontSize: 14,
         height: .4,
         fontWeight: FontWeight.w400,
         color: AppPallete.grayLight,
-        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontFamily: GoogleFonts.roboto().fontFamily,
       ),
     ),
 
@@ -113,11 +128,11 @@ class AppTheme {
       ),
       labelStyle: TextStyle(
         fontSize: 16,
-        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontFamily: GoogleFonts.inter().fontFamily,
       ),
       unselectedLabelStyle: TextStyle(
         fontSize: 16,
-        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontFamily: GoogleFonts.inter().fontFamily,
       ),
       unselectedLabelColor: AppPallete.tabLabelUnselectedColor,
       labelColor: AppPallete.tabLabelSelectedColor,

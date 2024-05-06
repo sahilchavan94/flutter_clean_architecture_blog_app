@@ -1,13 +1,9 @@
-import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
-import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/blog/presentation/managers/edit_blog_manager.dart';
 import 'package:blog_app/features/blog/presentation/widgets/blog_interests_wrapper.dart';
 import 'package:blog_app/features/blog/presentation/widgets/preview_blog/carousel_image_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class BlogPreview extends StatefulWidget {
@@ -20,9 +16,6 @@ class BlogPreview extends StatefulWidget {
 class _BlogPreviewState extends State<BlogPreview> {
   @override
   Widget build(BuildContext context) {
-    final currentUserData =
-        context.read<CurrentUserCubit>().state as CurrentUserDataFetched;
-
     return Consumer<EditBlogManager>(
       builder: (context, editBlogManager, child) {
         return SingleChildScrollView(
@@ -61,9 +54,7 @@ class _BlogPreviewState extends State<BlogPreview> {
                               editBlogManager.blogTitle.text,
                               style: AppTheme
                                   .darkThemeData.textTheme.displayLarge!
-                                  .copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  .copyWith(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -82,59 +73,37 @@ class _BlogPreviewState extends State<BlogPreview> {
                         ),
                       ),
                     ),
-                  )
+                  ),
+                  Positioned(
+                    top: 30,
+                    right: 35,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: editBlogManager.blogImageList
+                                    .elementAt(editBlogManager.currentImage) ==
+                                null
+                            ? Colors.white.withOpacity(.1)
+                            : Colors.black.withOpacity(.25),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 8,
+                      ),
+                      child: Text(
+                        "${(editBlogManager.currentImage + 1).toString()}  /  ${editBlogManager.blogImageList.length}",
+                      ),
+                    ),
+                  ),
                 ],
               ),
 
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //show the uploader data
-                    Row(
-                      children: [
-                        CustomImageView(
-                          width: 45,
-                          height: 45,
-                          imagePath: currentUserData.userEntity.profileImageUrl,
-                          fit: BoxFit.cover,
-                          radius: BorderRadius.circular(40),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${currentUserData.userEntity.firstname.capitalize()} ${currentUserData.userEntity.lastname.capitalize()}",
-                              style: AppTheme
-                                  .darkThemeData.textTheme.displayMedium!
-                                  .copyWith(
-                                fontSize: 16,
-                                color: AppPallete.grayLabel,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            Text(
-                              DateFormat().format(DateTime.now()),
-                              style: AppTheme
-                                  .darkThemeData.textTheme.displayMedium!
-                                  .copyWith(
-                                fontSize: 12,
-                                color: AppPallete.grayLabel,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-
                     BlogInterestWrapper(
                       list: editBlogManager.blogCategories,
                     ),
@@ -142,14 +111,7 @@ class _BlogPreviewState extends State<BlogPreview> {
                       height: 20,
                     ),
                     //now render the blog sub heading and the blog content
-                    Text(
-                      editBlogManager.blogSubHeading.text,
-                      style: AppTheme.darkThemeData.textTheme.displayLarge!
-                          .copyWith(
-                        fontSize: 18,
-                        color: AppPallete.grayLabel,
-                      ),
-                    ),
+
                     const SizedBox(
                       height: 10,
                     ),
@@ -168,11 +130,5 @@ class _BlogPreviewState extends State<BlogPreview> {
         );
       },
     );
-  }
-}
-
-extension StringExtension on String {
-  String capitalize() {
-    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   }
 }

@@ -20,32 +20,30 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
     return Consumer<EditBlogManager>(
       builder: (BuildContext context, editBlogManager, Widget? child) {
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(
               height: 30,
             ),
             TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
-                errorBorder: OutlineInputBorder(
+                errorBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
                 hintText: 'Add blog title',
+                hintStyle: AppTheme.darkThemeData.textTheme.headlineLarge,
                 contentPadding: EdgeInsets.zero,
               ),
-              style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
-                fontWeight: FontWeight.w500,
-                color: AppPallete.grayLabel,
-              ),
+              style: AppTheme.darkThemeData.textTheme.headlineLarge,
               controller: editBlogManager.blogTitle,
               maxLines: null,
             ),
@@ -130,93 +128,97 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
       showDragHandle: true,
       backgroundColor: AppPallete.bottomSheetColor,
       constraints: BoxConstraints.expand(
-        height: MediaQuery.of(context).size.height * .5,
+        height: MediaQuery.of(context).size.height * .75,
       ),
       builder: (context) {
-        return StatefulBuilder(builder: (context, setBottomState) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
-            child: Column(
-              children: [
-                Text(
-                  'Select categories',
-                  style:
-                      AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
-                    color: AppPallete.grayLabel,
+        return StatefulBuilder(
+          builder: (context, setBottomState) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    'Select categories',
+                    style:
+                        AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
+                      color: AppPallete.grayLabel,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: CategoryList.blogCategories.length,
-                    itemBuilder: (context, index) {
-                      const list = CategoryList.blogCategories;
-                      return Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Chip(
-                                padding: const EdgeInsets.all(1),
-                                labelPadding:
-                                    const EdgeInsets.symmetric(horizontal: 9),
-                                label: Text(
-                                  CategoryList.blogCategories[index],
-                                  style: AppTheme
-                                      .darkThemeData.textTheme.displaySmall!
-                                      .copyWith(
-                                    color: CategoryList
-                                        .categoryColors[list[index]],
-                                    fontSize: 14,
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: CategoryList.blogCategories.length,
+                      itemBuilder: (context, index) {
+                        const list = CategoryList.blogCategories;
+                        return Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Chip(
+                                  padding: const EdgeInsets.all(1),
+                                  labelPadding:
+                                      const EdgeInsets.symmetric(horizontal: 9),
+                                  label: Text(
+                                    CategoryList.blogCategories[index],
+                                    style: AppTheme
+                                        .darkThemeData.textTheme.displaySmall!
+                                        .copyWith(
+                                      color: CategoryList
+                                          .categoryColors[list[index]],
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  side: BorderSide.none,
+                                  surfaceTintColor:
+                                      ColorManipulation.reduceAlpha(
+                                    CategoryList.categoryColors[list[index]]!,
+                                  ),
+                                  backgroundColor:
+                                      ColorManipulation.reduceAlpha(
+                                    CategoryList.categoryColors[list[index]]!,
                                   ),
                                 ),
-                                side: BorderSide.none,
-                                surfaceTintColor: ColorManipulation.reduceAlpha(
-                                  CategoryList.categoryColors[list[index]]!,
+                                IconButton(
+                                  icon: editBlogManager.blogCategories
+                                          .contains(list[index])
+                                      ? const Icon(
+                                          Icons.radio_button_checked,
+                                          color: AppPallete.primaryColor,
+                                        )
+                                      : const Icon(
+                                          Icons.radio_button_unchecked,
+                                        ),
+                                  iconSize: 17,
+                                  color: AppPallete.grayLabel,
+                                  onPressed: () {
+                                    setBottomState(() {
+                                      editBlogManager.handleCategory(
+                                        list[index],
+                                      );
+                                    });
+                                  },
                                 ),
-                                backgroundColor: ColorManipulation.reduceAlpha(
-                                  CategoryList.categoryColors[list[index]]!,
-                                ),
-                              ),
-                              IconButton(
-                                icon: editBlogManager.blogCategories
-                                        .contains(list[index])
-                                    ? const Icon(
-                                        Icons.radio_button_checked,
-                                        color: AppPallete.primaryColor,
-                                      )
-                                    : const Icon(
-                                        Icons.radio_button_unchecked,
-                                      ),
-                                iconSize: 17,
-                                color: AppPallete.grayLabel,
-                                onPressed: () {
-                                  setBottomState(() {
-                                    editBlogManager.handleCategory(
-                                      list[index],
-                                    );
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                          const Divider(
-                            thickness: .1,
-                            color: AppPallete.deactivatedTextColor,
-                          ),
-                        ],
-                      );
-                    },
+                              ],
+                            ),
+                            const Divider(
+                              thickness: .1,
+                              color: AppPallete.deactivatedTextColor,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        });
+                ],
+              ),
+            );
+          },
+        );
       },
     );
   }

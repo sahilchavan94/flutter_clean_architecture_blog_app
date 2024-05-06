@@ -5,7 +5,6 @@ import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/blog/presentation/pages/blog_home.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +23,6 @@ class _SelectInterestsState extends State<SelectInterests> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          context.read<AuthBloc>().add(AuthIsUserLoggedIn());
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Updated user categories'),
@@ -110,8 +108,12 @@ class _SelectInterestsState extends State<SelectInterests> {
               child: ButtonWidget(
                 buttonText: 'Select at least 5 categories',
                 onPressed: () async {
-                  context.read<AuthBloc>().add(AuthUpdateUserInterest(
-                      selectedCategories: selectedCategories));
+                  context.read<AuthBloc>().add(
+                        AuthUpdateUserInterest(
+                          selectedCategories: selectedCategories,
+                        ),
+                      );
+                  context.read<AuthBloc>().add(AuthIsUserLoggedIn());
                 },
                 isLoading: state.runtimeType == AuthLoading,
                 isActive: selectedCategories.length >= 5,

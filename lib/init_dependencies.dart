@@ -9,6 +9,15 @@ import 'package:blog_app/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:blog_app/features/auth/domain/usecases/sign_up_usecase.dart';
 import 'package:blog_app/features/auth/domain/usecases/update_user_interests_usecase.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:blog_app/features/blog/data/datasources/blog_remote_datasource.dart';
+import 'package:blog_app/features/blog/data/repositories/blog_repository_impl.dart';
+import 'package:blog_app/features/blog/domain/repositories/blog_repository.dart';
+import 'package:blog_app/features/blog/domain/usecases/get_all_blog.dart';
+import 'package:blog_app/features/blog/domain/usecases/get_poster_data.dart';
+import 'package:blog_app/features/blog/domain/usecases/upload_blog.dart';
+import 'package:blog_app/features/blog/domain/usecases/upload_blog_images.dart';
+import 'package:blog_app/features/blog/presentation/blocs/bloc/blog_bloc.dart';
+import 'package:blog_app/features/blog/presentation/blocs/poster/bloc/poster_bloc.dart';
 import 'package:blog_app/features/blog/presentation/managers/edit_blog_manager.dart';
 import 'package:blog_app/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:blog_app/features/profile/data/repositories/profile_repository_impl.dart';
@@ -39,6 +48,9 @@ Future<void> initDependencies() async {
   //core
   serviceLocator.registerLazySingleton<CurrentUserCubit>(
     () => CurrentUserCubit(),
+  );
+  serviceLocator.registerLazySingleton<EditBlogManager>(
+    () => EditBlogManager(),
   );
 
   _initAuth();
@@ -128,7 +140,48 @@ void _initProfile() {
 }
 
 void _initBlog() {
-  serviceLocator.registerLazySingleton(
-    () => EditBlogManager(),
-  );
+  serviceLocator
+    ..registerFactory(
+      () => BlogRemoteDataSourceImpl(
+        firebaseDatabase: serviceLocator(),
+        firebaseStorage: serviceLocator(),
+      ),
+    )
+    ..registerFactory<BlogRepository>(
+      () => BlogRepositoryImpl(
+        blogRemoteDataSource: serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => UploadBlogImagesUseCase(
+        blogRepository: serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => UploadBlogUseCase(
+        blogRepository: serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetAllBlogUseCase(
+        blogRepository: serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetPosterDataUseCase(
+        blogRepository: serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => BlogBloc(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => PosterBloc(
+        serviceLocator(),
+      ),
+    );
 }

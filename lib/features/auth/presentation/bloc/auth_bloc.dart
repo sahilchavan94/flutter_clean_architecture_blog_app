@@ -60,7 +60,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.password,
       );
       response.fold(
-        (l) => emit(AuthFailure(l.message)),
+        (l) => emit(
+          AuthFailure(l.message ?? 'Something went wrong'),
+        ),
         (r) => emit(AuthSuccess()),
       );
     } on ServerException catch (e) {
@@ -75,7 +77,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.password,
       );
       response.fold(
-        (l) => emit(AuthFailure(l.message)),
+        (l) => emit(AuthFailure(l.message ?? 'Something went wrong')),
         (r) => emit(AuthSuccess()),
       );
     } on ServerException catch (e) {
@@ -87,7 +89,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       AuthSignOut event, Emitter<AuthState> emit) async {
     try {
       final response = await signOut.call();
-      response.fold((l) => emit(AuthFailure(l.message)), (r) {
+      response.fold(
+          (l) => emit(AuthFailure(l.message ?? 'Something went wrong')), (r) {
         //update the user cubit
         _emitAuthSuccess(emit, null);
         //update the state
@@ -104,7 +107,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final response =
           await updateCurrentUserInterests.call(event.selectedCategories);
       response.fold(
-        (l) => emit(AuthFailure(l.message)),
+        (l) => emit(AuthFailure(l.message ?? 'Something went wrong')),
         (r) {
           emit(AuthSuccess());
         },
