@@ -135,7 +135,6 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
             Text(
               '${currentUserData.userEntity.firstname.capitalize()} ${currentUserData.userEntity.lastname.capitalize()}',
               style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
-                fontSize: 24,
                 fontWeight: FontWeight.w400,
                 color: AppPallete.grayLabel,
               ),

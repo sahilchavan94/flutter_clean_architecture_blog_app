@@ -1,7 +1,6 @@
 import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
-import 'package:blog_app/features/auth/domain/entities/user_entity.dart';
 import 'package:blog_app/features/blog/domain/entities/blog_entity.dart';
 import 'package:blog_app/features/blog/presentation/managers/edit_blog_manager.dart';
 import 'package:blog_app/features/blog/presentation/widgets/blog_interests_wrapper.dart';

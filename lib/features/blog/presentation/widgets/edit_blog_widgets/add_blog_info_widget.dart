@@ -140,7 +140,7 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
               child: Column(
                 children: [
                   Text(
-                    'Select categories',
+                    'Select relevant categories',
                     style:
                         AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
                       color: AppPallete.grayLabel,

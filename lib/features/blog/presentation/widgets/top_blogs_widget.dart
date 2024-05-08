@@ -1,7 +1,7 @@
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
 import 'package:blog_app/core/common/widgets/custom_blog_widget.dart';
 import 'package:blog_app/core/common/widgets/custom_error_widget.dart';
-import 'package:blog_app/features/blog/presentation/blocs/bloc/blog_bloc.dart';
+import 'package:blog_app/features/blog/presentation/blocs/blog/blog_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

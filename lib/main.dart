@@ -1,8 +1,7 @@
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/signup_view.dart';
-import 'package:blog_app/features/blog/presentation/blocs/bloc/blog_bloc.dart';
-import 'package:blog_app/features/blog/presentation/blocs/poster/bloc/poster_bloc.dart';
+import 'package:blog_app/features/blog/presentation/blocs/blog/blog_bloc.dart';
 import 'package:blog_app/features/blog/presentation/managers/edit_blog_manager.dart';
 import 'package:blog_app/features/blog/presentation/pages/blog_home.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
@@ -39,9 +38,6 @@ void main() async {
         ),
         BlocProvider(
           create: (_) => serviceLocator<ProfileBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => serviceLocator<PosterBloc>(),
         ),
         BlocProvider(
           lazy: false,
