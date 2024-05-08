@@ -23,10 +23,12 @@ class SeeOthersBlogsView extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Visibility(
-            visible: blogs.isEmpty,
-            child: const CustomErrorWidget(
-              message: 'No more blogs',
+          Center(
+            child: Visibility(
+              visible: blogs.isEmpty,
+              child: const CustomErrorWidget(
+                message: 'No more blogs',
+              ),
             ),
           ),
           Expanded(
