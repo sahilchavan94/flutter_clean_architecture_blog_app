@@ -1,12 +1,12 @@
-import 'dart:developer';
-
 import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/common/widgets/image_error_widget.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/blog/domain/entities/blog_entity.dart';
+import 'package:blog_app/features/blog/presentation/blocs/blog/blog_bloc.dart';
 import 'package:blog_app/features/blog/presentation/managers/edit_blog_manager.dart';
 import 'package:blog_app/features/blog/presentation/pages/blog_read_view.dart';
+import 'package:blog_app/features/blog/presentation/pages/see_others_blogs.dart';
 import 'package:blog_app/features/profile/presentation/widgets/profile_info_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -212,7 +212,6 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                             style: AppTheme
                                 .darkThemeData.textTheme.displayLarge!
                                 .copyWith(
-                              fontSize: 24,
                               fontWeight: FontWeight.w400,
                               color: AppPallete.grayLabel,
                               overflow: TextOverflow.ellipsis,
@@ -263,8 +262,26 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                                 color: AppPallete.deactivatedBackgroundColor,
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              child: Text(
-                                "See more blogs by ${widget.blogEntity.userEntity!.firstname.capitalize()}",
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SeeOthersBlogsView(
+                                        blogList: (context
+                                                .read<BlogBloc>()
+                                                .state as BlogGetAllBlogSuccess)
+                                            .blogList,
+                                        posterId:
+                                            widget.blogEntity.userEntity!.uid,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  "See more blogs by ${widget.blogEntity.userEntity!.firstname.capitalize()}",
+                                ),
                               ),
                             ),
                           )

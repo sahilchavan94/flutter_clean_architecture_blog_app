@@ -196,11 +196,13 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
                                   iconSize: 17,
                                   color: AppPallete.grayLabel,
                                   onPressed: () {
-                                    setBottomState(() {
-                                      editBlogManager.handleCategory(
-                                        list[index],
-                                      );
-                                    });
+                                    setBottomState(
+                                      () {
+                                        editBlogManager.handleCategory(
+                                          list[index],
+                                        );
+                                      },
+                                    );
                                   },
                                 ),
                               ],
