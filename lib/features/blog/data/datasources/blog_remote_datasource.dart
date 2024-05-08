@@ -99,15 +99,20 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
       final raw = await firebaseDatabase.ref("blogs").once();
       final response = jsonDecode(jsonEncode(raw.snapshot.value));
       if (response != null) {
-        final blogList = (response as Map<String, dynamic>)
-            .entries
-            .map(
-              (blog) => BlogModel.fromJson(
-                blog.value as Map<String, dynamic>,
-              ),
-            )
-            .toList();
-        return blogList;
+        final blogList =
+            (response as Map<String, dynamic>).entries.map((blog) async {
+          final posterId = blog.value['posterId'];
+          final raw2 =
+              await firebaseDatabase.ref("users").child(posterId).once();
+          final posterResponse = jsonDecode(
+            jsonEncode(raw2.snapshot.value),
+          );
+          return BlogModel.fromJson(blog.value).copyWith(
+            userEntity: UserModel.fromJson(posterResponse),
+          );
+        }).toList();
+        final list = Future.wait(blogList);
+        return list;
       }
       return [];
     } catch (e) {

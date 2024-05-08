@@ -13,11 +13,9 @@ import 'package:provider/provider.dart';
 
 class BlogReadView extends StatefulWidget {
   final BlogEntity blogEntity;
-  final UserEntity posterData;
   const BlogReadView({
     super.key,
     required this.blogEntity,
-    required this.posterData,
   });
 
   @override
@@ -39,8 +37,8 @@ class _BlogReadViewState extends State<BlogReadView> {
           SliverAppBar(
             centerTitle: true,
             title: Text(
-              widget.blogEntity.posterName.isNotEmpty
-                  ? "${widget.blogEntity.posterName.split(" ")[0].capitalize()} ${widget.blogEntity.posterName.split(" ")[1].capitalize()}"
+              widget.blogEntity.userEntity != null
+                  ? "${widget.blogEntity.userEntity!.firstname.capitalize()} ${widget.blogEntity.userEntity!.lastname.capitalize()}"
                   : 'Anonymous',
               style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
                 fontSize: 20,
@@ -110,14 +108,14 @@ class _BlogReadViewState extends State<BlogReadView> {
                               overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             Text(
                               widget.blogEntity.blogSubTitle.capitalize(),
                               style: AppTheme
                                   .darkThemeData.textTheme.displayMedium!
                                   .copyWith(
-                                fontSize: 20,
+                                fontSize: 17.5,
                                 color: AppPallete.grayLabel,
                               ),
                               maxLines: 2,
@@ -143,15 +141,15 @@ class _BlogReadViewState extends State<BlogReadView> {
                   width: MediaQuery.of(context).size.width * .8,
                   child: ListTile(
                     leading: CustomImageView(
-                      imagePath: widget.blogEntity.posterImageUrl,
+                      imagePath: widget.blogEntity.userEntity!.profileImageUrl,
                       fit: BoxFit.cover,
                       width: 50,
                       height: 50,
                       radius: BorderRadius.circular(50),
                     ),
                     title: Text(
-                      widget.blogEntity.posterName.isNotEmpty
-                          ? widget.blogEntity.posterName.capitalize()
+                      widget.blogEntity.userEntity != null
+                          ? "${widget.blogEntity.userEntity!.firstname.capitalize()} ${widget.blogEntity.userEntity!.lastname.capitalize()}"
                           : 'Anonymous',
                       style: AppTheme.darkThemeData.textTheme.displayMedium!
                           .copyWith(
