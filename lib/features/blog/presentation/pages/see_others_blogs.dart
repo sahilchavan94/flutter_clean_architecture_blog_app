@@ -1,5 +1,4 @@
 import 'package:blog_app/core/common/widgets/custom_blog_widget.dart';
-import 'package:blog_app/core/common/widgets/custom_error_widget.dart';
 import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';

@@ -11,5 +11,5 @@ class AppStrings {
       'Set your interests for getting relevant content for reading';
 
   static const noInternetString =
-      'You device is not connected to the internet, till then you can access your favourite blogs from your local device';
+      'You device is not connected to internet, till then you can access the favourites from your local device ( you may still view cached results )';
 }

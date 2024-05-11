@@ -57,14 +57,20 @@ class EditBlogManager extends ChangeNotifier {
   String validateBlog() {
     if (blogTitle.text.isEmpty) {
       return "Blog title cannot be empty";
+    } else if (blogTitle.text.length < 6) {
+      return "Blog title should be at least 6 characters long";
     }
 
     if (blogSubTitle.text.isEmpty) {
       return "Blog subtitle cannot be empty";
+    } else if (blogSubTitle.text.length < 6) {
+      return "Blog subtitle should be at least 6 characters long";
     }
 
     if (blogContent.text.isEmpty) {
       return "Blog content cannot be empty";
+    } else if (blogContent.text.length < 50) {
+      return "Blog content should be at least 50 characters long";
     }
 
     if (blogImageList[0] == null) {
