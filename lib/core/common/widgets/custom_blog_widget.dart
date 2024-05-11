@@ -44,7 +44,7 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: widget.padding ?? 12,
-        vertical: 5.5,
+        vertical: 7.5,
       ),
       child: Column(
         children: [
