@@ -7,11 +7,12 @@ import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/blog/presentation/blocs/favs/bloc/favs_bloc.dart';
 import 'package:blog_app/features/blog/presentation/pages/add_new_blog.dart';
-import 'package:blog_app/features/blog/presentation/widgets/fav_blogs.dart';
+import 'package:blog_app/features/blog/presentation/widgets/fav_blogs_widget.dart';
 import 'package:blog_app/features/blog/presentation/widgets/top_blogs_widget.dart';
 import 'package:blog_app/features/profile/presentation/pages/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class BlogHome extends StatefulWidget {
   const BlogHome({super.key});
@@ -23,10 +24,27 @@ class BlogHome extends StatefulWidget {
 class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
   late TabController _tabController;
 
+  checkConnection() async {
+    final res = await InternetConnectionChecker().hasConnection;
+    if (!res) {
+      _tabController.index = 1;
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(AppStrings.noInternetString),
+        ),
+      );
+    }
+  }
+
   @override
   void initState() {
     context.read<AuthBloc>().add(AuthIsUserLoggedIn());
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+    );
+    checkConnection();
     super.initState();
   }
 

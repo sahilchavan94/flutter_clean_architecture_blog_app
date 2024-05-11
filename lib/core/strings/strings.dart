@@ -9,4 +9,7 @@ class AppStrings {
       'Discover, engage, and explore. Your gateway to limitless blogging adventures opens here.';
   static const personalInterestString =
       'Set your interests for getting relevant content for reading';
+
+  static const noInternetString =
+      'You device is not connected to the internet, till then you can access your favourite blogs from your local device';
 }

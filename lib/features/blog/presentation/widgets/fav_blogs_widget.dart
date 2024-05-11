@@ -33,7 +33,7 @@ class _FavouriteBlogsState extends State<FavouriteBlogs> {
         }
         if (state is FavBlogsGetFavsFailure) {
           return const CustomErrorWidget(
-            message: "Failed to load the favourites",
+            message: "No favourites found",
           );
         }
 

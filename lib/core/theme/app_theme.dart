@@ -25,7 +25,7 @@ class AppTheme {
       ),
       //display large
       displayLarge: TextStyle(
-        fontSize: 21,
+        fontSize: 19.5,
         fontWeight: FontWeight.w500,
         letterSpacing: .1,
         fontFamily: GoogleFonts.inter().fontFamily,

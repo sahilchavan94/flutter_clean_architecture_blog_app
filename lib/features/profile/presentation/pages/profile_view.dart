@@ -24,14 +24,6 @@ class _ProfileViewState extends State<ProfileView> {
         title: const Text(
           'Profile',
         ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.edit,
-            ),
-          ),
-        ],
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {

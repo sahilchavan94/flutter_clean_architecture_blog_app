@@ -31,8 +31,6 @@ class CustomBlogWidget extends StatefulWidget {
 }
 
 class _CustomBlogWidgetState extends State<CustomBlogWidget> {
-  bool isAddedInFavs = false;
-  bool isSnackBarVisible = false;
   @override
   void initState() {
     context
@@ -44,7 +42,10 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(widget.padding ?? 12),
+      padding: EdgeInsets.symmetric(
+        horizontal: widget.padding ?? 12,
+        vertical: 5.5,
+      ),
       child: Column(
         children: [
           GestureDetector(
@@ -115,6 +116,7 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                         style: AppTheme.darkThemeData.textTheme.displayMedium!
                             .copyWith(
                           fontSize: 15,
+                          color: Colors.white70,
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
@@ -185,10 +187,10 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
           ),
 
           const SizedBox(
-            height: 12,
+            height: 5,
           ),
 
-          //the posted details
+          //the poster details
 
           Visibility(
             visible: widget.isInHome == true,
@@ -236,7 +238,7 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                                 .darkThemeData.textTheme.displayLarge!
                                 .copyWith(
                               fontWeight: FontWeight.w400,
-                              color: AppPallete.grayLabel,
+                              color: AppPallete.primaryColor,
                               overflow: TextOverflow.ellipsis,
                             ),
                             maxLines: 2,
@@ -296,8 +298,7 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                                                 .read<BlogBloc>()
                                                 .state as BlogGetAllBlogSuccess)
                                             .blogList,
-                                        posterId:
-                                            widget.blogEntity.userEntity!.uid,
+                                        user: widget.blogEntity.userEntity!,
                                       ),
                                     ),
                                   );
@@ -319,8 +320,8 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                 child: CustomImageView(
                   imagePath: widget.blogEntity.userEntity?.profileImageUrl,
                   fit: BoxFit.cover,
-                  width: 50,
-                  height: 50,
+                  width: 44,
+                  height: 43,
                   radius: BorderRadius.circular(50),
                 ),
               ),

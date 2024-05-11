@@ -79,8 +79,8 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                           color: AppPallete.bottomSheetColor,
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        width: 100,
-                        height: 100,
+                        width: 90,
+                        height: 90,
                         child: Center(
                           child: LinearProgressIndicator(
                             borderRadius: BorderRadius.circular(50),
