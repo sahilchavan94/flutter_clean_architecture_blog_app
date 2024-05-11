@@ -2,6 +2,7 @@ import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
 import 'package:blog_app/core/common/widgets/custom_blog_widget.dart';
 import 'package:blog_app/core/common/widgets/custom_error_widget.dart';
 import 'package:blog_app/features/blog/presentation/blocs/blog/blog_bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,13 +45,18 @@ class _TopBlogsWidgetState extends State<TopBlogsWidget> {
               message: 'No Blogs added yet',
             );
           }
-          return ListView.builder(
-            itemCount: state.blogList.length,
-            itemBuilder: (context, index) {
-              return CustomBlogWidget(
-                blogEntity: state.blogList[index],
-              );
-            },
+          return ScrollConfiguration(
+            behavior: const CupertinoScrollBehavior(),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: state.blogList.length,
+              itemBuilder: (context, index) {
+                return CustomBlogWidget(
+                  blogEntity: state.blogList[index],
+                  isInHome: true,
+                );
+              },
+            ),
           );
         }
         return const SizedBox.shrink();

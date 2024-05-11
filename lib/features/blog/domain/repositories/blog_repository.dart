@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:blog_app/core/error/failures.dart';
 import 'package:blog_app/features/auth/domain/entities/user_entity.dart';
+import 'package:blog_app/features/blog/data/models/blog_model.dart';
 import 'package:blog_app/features/blog/domain/entities/blog_entity.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -24,4 +25,7 @@ abstract interface class BlogRepository {
 
   Future<Either<Failure, List<BlogEntity>>> getAllBlogs();
   Future<Either<Failure, UserEntity>> getPosterData(String posterId);
+  Future<Either<Failure, String>> addBlogToFavourites(BlogModel blog);
+  Future<Either<Failure, bool>> checkBlogInFavs(String uid);
+  Future<Either<Failure, List<BlogEntity>>> getAllFavs();
 }

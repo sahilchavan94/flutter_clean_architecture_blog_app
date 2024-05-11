@@ -22,7 +22,7 @@ class _SelectInterestsState extends State<SelectInterests> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthSuccess) {
+        if (state is AuthUpdatedUserIn) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Updated user categories'),
@@ -113,7 +113,6 @@ class _SelectInterestsState extends State<SelectInterests> {
                           selectedCategories: selectedCategories,
                         ),
                       );
-                  context.read<AuthBloc>().add(AuthIsUserLoggedIn());
                 },
                 isLoading: state.runtimeType == AuthLoading,
                 isActive: selectedCategories.length >= 5,

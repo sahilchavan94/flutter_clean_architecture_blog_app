@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:blog_app/features/blog/domain/entities/blog_entity.dart';
@@ -55,7 +54,6 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
           event.uploadBlogParams.blogCategories,
           imageList2,
         );
-        log("res2 is $res2");
         if (res2.isRight()) {
           emit(BlogSuccess());
         } else {
@@ -73,7 +71,6 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     final response = await _getAllBlogUseCase.call();
     response.fold(
       (l) {
-        log(l.runtimeType.toString());
         emit(
           BlogGetAllBlogFailure(message: 'Something went wrong'),
         );

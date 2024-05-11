@@ -120,9 +120,9 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                     },
                     icon: const Icon(
                       CupertinoIcons.camera_fill,
-                      color: Colors.white,
+                      color: AppPallete.grayLabel,
                     ),
-                    iconSize: 25,
+                    iconSize: 20,
                   ),
                 )
               ],

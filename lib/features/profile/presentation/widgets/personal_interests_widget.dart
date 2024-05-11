@@ -43,7 +43,7 @@ class _PersonalInterestsWidgetState extends State<PersonalInterestsWidget> {
           maxLines: 1,
         ),
         const SizedBox(
-          height: 15,
+          height: 8,
         ),
         BlogInterestWrapper(list: list),
       ],

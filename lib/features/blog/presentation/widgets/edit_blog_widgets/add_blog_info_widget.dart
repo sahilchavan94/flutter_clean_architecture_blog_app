@@ -144,6 +144,7 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
                     style:
                         AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
                       color: AppPallete.grayLabel,
+                      fontSize: 19,
                     ),
                   ),
                   const SizedBox(

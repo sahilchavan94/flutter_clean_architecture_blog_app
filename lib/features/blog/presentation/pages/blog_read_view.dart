@@ -31,6 +31,7 @@ class _BlogReadViewState extends State<BlogReadView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
+        scrollBehavior: const CupertinoScrollBehavior(),
         controller: scrollController,
         slivers: [
           SliverAppBar(
@@ -40,7 +41,7 @@ class _BlogReadViewState extends State<BlogReadView> {
                   ? "${widget.blogEntity.userEntity!.firstname.capitalize()} ${widget.blogEntity.userEntity!.lastname.capitalize()}"
                   : 'Anonymous',
               style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
-                fontSize: 20,
+                fontSize: 18,
               ),
             ),
             pinned: true,
@@ -60,6 +61,7 @@ class _BlogReadViewState extends State<BlogReadView> {
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       "${(editBlogManager.currentBlogImage + 1).toString()}  /  ${widget.blogEntity.imageUrlList.length}",
+                      style: AppTheme.darkThemeData.textTheme.displaySmall,
                     ),
                   );
                 },
@@ -132,55 +134,38 @@ class _BlogReadViewState extends State<BlogReadView> {
 
           //poster details
           SliverToBoxAdapter(
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * .8,
-                  child: ListTile(
-                    leading: CustomImageView(
-                      imagePath: widget.blogEntity.userEntity!.profileImageUrl,
-                      fit: BoxFit.cover,
-                      width: 50,
-                      height: 50,
-                      radius: BorderRadius.circular(50),
-                    ),
-                    title: Text(
-                      widget.blogEntity.userEntity != null
-                          ? "${widget.blogEntity.userEntity!.firstname.capitalize()} ${widget.blogEntity.userEntity!.lastname.capitalize()}"
-                          : 'Anonymous',
-                      style: AppTheme.darkThemeData.textTheme.displayMedium!
-                          .copyWith(
-                        fontSize: 17,
-                        color: Colors.white,
-                      ),
-                    ),
-                    subtitle: Text(
-                      widget.blogEntity.date!.isNotEmpty
-                          ? widget.blogEntity.date.toString()
-                          : 'Uploaded date not found',
-                      style: AppTheme.darkThemeData.textTheme.displayMedium!
-                          .copyWith(
-                        fontSize: 14,
-                        color: Colors.white54,
-                      ),
-                    ),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * .8,
+              child: ListTile(
+                leading: CustomImageView(
+                  imagePath:
+                      widget.blogEntity.userEntity?.profileImageUrl ?? '',
+                  fit: BoxFit.cover,
+                  width: 50,
+                  height: 50,
+                  radius: BorderRadius.circular(50),
+                ),
+                title: Text(
+                  widget.blogEntity.userEntity != null
+                      ? "${widget.blogEntity.userEntity!.firstname.capitalize()} ${widget.blogEntity.userEntity!.lastname.capitalize()}"
+                      : 'Anonymous',
+                  style:
+                      AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
+                    fontSize: 17,
+                    color: Colors.white,
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 12.0),
-                  child: Row(
-                    children: [
-                      Icon(CupertinoIcons.heart),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("360"),
-                    ],
+                subtitle: Text(
+                  widget.blogEntity.date!.isNotEmpty
+                      ? widget.blogEntity.date.toString()
+                      : 'Uploaded date not found',
+                  style:
+                      AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
+                    fontSize: 14,
+                    color: Colors.white54,
                   ),
-                )
-              ],
+                ),
+              ),
             ),
           ),
 

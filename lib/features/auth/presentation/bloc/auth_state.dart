@@ -9,11 +9,15 @@ final class AuthLoading extends AuthState {}
 
 final class AuthSuccess extends AuthState {}
 
+final class AuthSignedIn extends AuthState {}
+
+final class AuthLoggedIn extends AuthState {}
+
 final class AuthUpdatedUserIn extends AuthState {}
+
+final class AuthSignedOut extends AuthState {}
 
 final class AuthFailure extends AuthState {
   final String message;
   AuthFailure(this.message);
 }
-
-final class AuthSignedOut extends AuthState {}

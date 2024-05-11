@@ -50,162 +50,163 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthBloc, AuthState>(
-      listener: (context, state) async {
-        if (state is AuthFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              duration: const Duration(milliseconds: 1500),
-              content: Text(state.message),
-            ),
-          );
-        }
-        if (state is AuthSuccess) {
-          context.read<AuthBloc>().add(AuthIsUserLoggedIn());
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              duration: Duration(milliseconds: 1500),
-              content: Text('Logged into account'),
-            ),
-          );
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const BlogHome(),
-            ),
-          );
-        }
-      },
-      builder: (context, state) {
-        return Scaffold(
-          body: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: MediaQuery.of(context).size.height * .1,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/images/blog_logo.png',
-                      height: 32,
-                      width: 32,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Welcome back',
-                      style: AppTheme.darkThemeData.textTheme.displayLarge,
-                    ),
-                  ],
-                ),
-
-                const SizedBox(
-                  height: 8,
-                ),
-
-                Text(
-                  AppStrings.signInString,
-                  style:
-                      AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
-                    color: AppPallete.grayLight,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-
-                //form
-                Form(
-                  key: _formKey,
-                  child: Column(
+    return Scaffold(
+      body: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) async {
+          if (state is AuthFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                duration: const Duration(milliseconds: 1500),
+                content: Text(state.message),
+              ),
+            );
+          }
+          if (state is AuthLoggedIn) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                duration: Duration(milliseconds: 1500),
+                content: Text('Logged into account'),
+              ),
+            );
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const BlogHome(),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: MediaQuery.of(context).size.height * .1,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      AuthInputWidget(
-                        hintText: 'Enter your email',
-                        labelText: 'Email',
-                        textEditingController: _emailController,
-                        validator: emailValidator,
-                        suffixIcon: const Icon(
-                          CupertinoIcons.mail_solid,
-                        ),
-                      ),
-                      AuthInputWidget(
-                        hintText: 'Enter your password',
-                        labelText: 'Password',
-                        textEditingController: _passwordController,
-                        obscureText: hidePassword,
-                        onPressed: () {
-                          setState(() {
-                            hidePassword = !hidePassword;
-                          });
-                        },
-                        suffixIcon: const Icon(
-                          CupertinoIcons.lock_fill,
-                        ),
-                        validator: passwordValidator,
+                      Image.asset(
+                        'assets/images/blog_logo.png',
+                        height: 32,
+                        width: 32,
                       ),
                       const SizedBox(
-                        height: 40,
+                        width: 10,
                       ),
-                      ButtonWidget(
-                        isLoading: state.runtimeType == AuthLoading,
-                        buttonText: 'Continue',
-                        onPressed: () {
-                          context.read<AuthBloc>().add(
-                                AuthSignIn(
-                                  _emailController.text.trim(),
-                                  _passwordController.text.trim(),
-                                ),
-                              );
-                        },
-                        isActive: isActive,
+                      Text(
+                        'Welcome back',
+                        style: AppTheme.darkThemeData.textTheme.displayLarge,
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(
-                  height: 45,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const SignUpView();
-                        },
-                      ),
-                    );
-                  },
-                  child: RichText(
-                    text: const TextSpan(
+
+                  const SizedBox(
+                    height: 8,
+                  ),
+
+                  Text(
+                    AppStrings.signInString,
+                    style:
+                        AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
+                      color: AppPallete.grayLight,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+
+                  //form
+                  Form(
+                    key: _formKey,
+                    child: Column(
                       children: [
-                        TextSpan(
-                          text: 'Don\'t have an account? ',
-                          style: TextStyle(
-                            color: AppPallete.grayLight,
+                        AuthInputWidget(
+                          hintText: 'Enter your email',
+                          labelText: 'Email',
+                          textEditingController: _emailController,
+                          validator: emailValidator,
+                          suffixIcon: const Icon(
+                            CupertinoIcons.mail_solid,
                           ),
                         ),
-                        TextSpan(
-                          text: 'Sign Up',
-                          style: TextStyle(
-                            color: AppPallete.primaryColor,
-                            fontWeight: FontWeight.w500,
+                        AuthInputWidget(
+                          hintText: 'Enter your password',
+                          labelText: 'Password',
+                          textEditingController: _passwordController,
+                          obscureText: hidePassword,
+                          onPressed: () {
+                            setState(() {
+                              hidePassword = !hidePassword;
+                            });
+                          },
+                          suffixIcon: const Icon(
+                            CupertinoIcons.lock_fill,
                           ),
-                        )
+                          validator: passwordValidator,
+                        ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        ButtonWidget(
+                          isLoading: state.runtimeType == AuthLoading,
+                          buttonText: 'Continue',
+                          onPressed: () {
+                            context.read<AuthBloc>().add(
+                                  AuthSignIn(
+                                    _emailController.text.trim(),
+                                    _passwordController.text.trim(),
+                                  ),
+                                );
+                          },
+                          isActive: isActive,
+                        ),
                       ],
                     ),
                   ),
-                )
-              ],
+                  const SizedBox(
+                    height: 45,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const SignUpView();
+                          },
+                        ),
+                      );
+                    },
+                    child: RichText(
+                      text: const TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Don\'t have an account? ',
+                            style: TextStyle(
+                              color: AppPallete.grayLight,
+                            ),
+                          ),
+                          TextSpan(
+                            text: 'Sign Up',
+                            style: TextStyle(
+                              color: AppPallete.primaryColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

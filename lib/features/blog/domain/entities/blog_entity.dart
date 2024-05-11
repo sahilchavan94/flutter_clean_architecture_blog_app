@@ -14,6 +14,7 @@ class BlogEntity {
   final List imageUrlList;
   final String? date;
   final UserEntity? userEntity;
+  final int? likes;
   BlogEntity({
     required this.uid,
     required this.posterId,
@@ -26,33 +27,26 @@ class BlogEntity {
     required this.imageUrlList,
     this.userEntity,
     this.date,
+    this.likes,
   });
 
   BlogEntity copyWith({
-    String? uid,
-    String? posterId,
-    String? posterName,
-    String? posterImageUrl,
-    String? blogTitle,
-    String? blogSubTitle,
-    String? blogContent,
-    List? blogCategories,
-    List? imageUrlList,
-    String? date,
     UserEntity? userEntity,
+    int? likes,
   }) {
     return BlogEntity(
-      uid: uid ?? this.uid,
-      posterId: posterId ?? this.posterId,
-      posterName: posterName ?? this.posterName,
-      posterImageUrl: posterImageUrl ?? this.posterImageUrl,
-      blogTitle: blogTitle ?? this.blogTitle,
-      blogSubTitle: blogSubTitle ?? this.blogSubTitle,
-      blogContent: blogContent ?? this.blogContent,
-      blogCategories: blogCategories ?? this.blogCategories,
-      imageUrlList: imageUrlList ?? this.imageUrlList,
-      date: date ?? this.date,
+      uid: uid,
+      posterId: posterId,
+      posterName: posterName,
+      posterImageUrl: posterImageUrl,
+      blogTitle: blogTitle,
+      blogSubTitle: blogSubTitle,
+      blogContent: blogContent,
+      blogCategories: blogCategories,
+      imageUrlList: imageUrlList,
+      date: date ?? date,
       userEntity: userEntity ?? this.userEntity,
+      likes: likes ?? this.likes,
     );
   }
 }

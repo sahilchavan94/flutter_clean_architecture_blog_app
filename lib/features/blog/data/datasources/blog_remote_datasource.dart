@@ -29,6 +29,7 @@ abstract interface class BlogRemoteDataSource {
 
   Future<List<BlogEntity>> getAllBlogs();
   Future<UserEntity> getPosterData(String posterId);
+  Future<String> likeBlog(String blogId, int currentLikes);
 }
 
 class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
@@ -109,6 +110,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
           );
           return BlogModel.fromJson(blog.value).copyWith(
             userEntity: UserModel.fromJson(posterResponse),
+            likes: blog.value['likes'],
           );
         }).toList();
         final list = Future.wait(blogList);
@@ -133,6 +135,23 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
           jsonEncode(response.snapshot.value),
         ),
       );
+    } catch (e) {
+      throw ServerException(error: e.toString());
+    }
+  }
+
+  //modify this method such that the blogId will be added in the user favourites
+  @override
+  Future<String> likeBlog(String blogId, int currentLikes) async {
+    try {
+      //modify the likes param in db
+      await firebaseDatabase.ref('blogs').child(blogId).update(
+        {"likes": currentLikes + 1},
+      ).then((value) {
+        //add that particular blogs in your favourite
+        return "blog added";
+      });
+      return "Failed";
     } catch (e) {
       throw ServerException(error: e.toString());
     }

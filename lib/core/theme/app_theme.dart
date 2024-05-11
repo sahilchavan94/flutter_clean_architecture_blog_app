@@ -11,7 +11,7 @@ class AppTheme {
       elevation: 0,
       titleTextStyle: const TextStyle().copyWith(
         fontFamily: GoogleFonts.roboto().fontFamily,
-        fontSize: 20,
+        fontSize: 18,
       ),
     ),
 

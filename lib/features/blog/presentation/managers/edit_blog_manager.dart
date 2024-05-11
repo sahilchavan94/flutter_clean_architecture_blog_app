@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:blog_app/core/utils/pick_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,7 +21,6 @@ class EditBlogManager extends ChangeNotifier {
     if (pickedImage != null) {
       blogImageList[index] = pickedImage;
     }
-    log(blogImageList.toString());
     notifyListeners();
   }
 

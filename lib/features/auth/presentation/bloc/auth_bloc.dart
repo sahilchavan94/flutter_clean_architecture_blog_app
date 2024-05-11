@@ -34,7 +34,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     this.signOut,
     this.updateCurrentUserInterests,
   ) : super(AuthInitial()) {
-    on<AuthEvent>((_, emit) => emit(AuthLoading()));
+    on<AuthEvent>((event, emit) {
+      emit(AuthLoading());
+    });
     on<AuthSignup>(_authSignUp);
     on<AuthSignIn>(_authSignIn);
     on<AuthIsUserLoggedIn>(_isUserLoggedIn);
@@ -45,10 +47,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _isUserLoggedIn(
       AuthIsUserLoggedIn event, Emitter<AuthState> emit) async {
     final response = await getUser.call();
-    response.fold(
-      (l) => emit(AuthFailure("Sign In or create a new Account")),
-      (r) => _emitAuthSuccess(emit, r),
-    );
+    response.fold((l) => emit(AuthFailure("Sign In or create a new Account")),
+        (r) {
+      _emitAuthSuccess(emit, r);
+      emit(AuthSuccess());
+    });
   }
 
   FutureOr<void> _authSignUp(AuthSignup event, Emitter<AuthState> emit) async {
@@ -63,7 +66,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         (l) => emit(
           AuthFailure(l.message ?? 'Something went wrong'),
         ),
-        (r) => emit(AuthSuccess()),
+        (r) => emit(AuthSignedIn()),
       );
     } on ServerException catch (e) {
       emit(AuthFailure(e.error));
@@ -78,7 +81,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       response.fold(
         (l) => emit(AuthFailure(l.message ?? 'Something went wrong')),
-        (r) => emit(AuthSuccess()),
+        (r) => emit(AuthLoggedIn()),
       );
     } on ServerException catch (e) {
       emit(AuthFailure(e.error));
@@ -109,7 +112,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       response.fold(
         (l) => emit(AuthFailure(l.message ?? 'Something went wrong')),
         (r) {
-          emit(AuthSuccess());
+          emit(AuthUpdatedUserIn());
         },
       );
     } on ServerException catch (e) {
