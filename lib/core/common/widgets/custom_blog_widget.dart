@@ -278,8 +278,8 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 12,
+                                vertical: 8,
+                                horizontal: 24,
                               ),
                               decoration: BoxDecoration(
                                 color: AppPallete.deactivatedBackgroundColor,
@@ -304,6 +304,9 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                                 },
                                 child: Text(
                                   "See more blogs by ${widget.blogEntity.userEntity!.firstname.capitalize()}",
+                                  style: const TextStyle(
+                                    color: AppPallete.grayLabel,
+                                  ),
                                 ),
                               ),
                             ),
