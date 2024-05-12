@@ -1,4 +1,5 @@
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
+import 'package:blog_app/core/common/widgets/custom_error_widget.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/blog/domain/entities/upload_blog_params.dart';
@@ -121,27 +122,8 @@ class _AddNewBlogState extends State<AddNewBlog> with TickerProviderStateMixin {
                     );
                   }
                   if (state is BlogFailure) {
-                    return Center(
-                      child: Column(
-                        children: [
-                          const Icon(
-                            Icons.error_outline_outlined,
-                            size: 50,
-                            color: AppPallete.errorColor,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            state.message,
-                            style: AppTheme
-                                .darkThemeData.textTheme.displayLarge!
-                                .copyWith(
-                              fontSize: 17,
-                            ),
-                          )
-                        ],
-                      ),
+                    return CustomErrorWidget(
+                      message: state.message,
                     );
                   }
 
