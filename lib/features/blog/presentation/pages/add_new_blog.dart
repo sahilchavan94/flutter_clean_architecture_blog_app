@@ -1,7 +1,5 @@
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
 import 'package:blog_app/core/common/widgets/custom_error_widget.dart';
-import 'package:blog_app/core/theme/app_pallete.dart';
-import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/blog/domain/entities/upload_blog_params.dart';
 import 'package:blog_app/features/blog/presentation/blocs/blog/blog_bloc.dart';
 import 'package:blog_app/features/blog/presentation/managers/edit_blog_manager.dart';

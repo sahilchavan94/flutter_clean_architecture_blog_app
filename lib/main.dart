@@ -81,7 +81,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkThemeData,
+      theme: AppTheme.lightThemeData,
+      darkTheme: AppTheme.darkThemeData,
+      themeMode: ThemeMode.system,
       home: BlocSelector<CurrentUserCubit, CurrentUserState, bool>(
         selector: (state) => state is CurrentUserDataFetched,
         builder: (context, isFetched) {

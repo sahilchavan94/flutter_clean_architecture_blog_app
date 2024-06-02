@@ -40,10 +40,19 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
                   borderSide: BorderSide.none,
                 ),
                 hintText: 'Add blog title',
-                hintStyle: AppTheme.darkThemeData.textTheme.headlineLarge,
+                hintStyle:
+                    AppTheme.darkThemeData.textTheme.headlineLarge!.copyWith(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? AppPallete.grayLabel
+                      : Colors.black87,
+                ),
                 contentPadding: EdgeInsets.zero,
               ),
-              style: AppTheme.darkThemeData.textTheme.headlineLarge,
+              style: AppTheme.darkThemeData.textTheme.headlineLarge!.copyWith(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppPallete.grayLabel
+                    : Colors.black87,
+              ),
               controller: editBlogManager.blogTitle,
               maxLines: null,
             ),
@@ -52,25 +61,35 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
             ),
 
             TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
-                errorBorder: OutlineInputBorder(
+                errorBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
                 hintText: 'Add a suitable subtitle',
                 contentPadding: EdgeInsets.zero,
+                hintStyle:
+                    AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? AppPallete.grayLabel
+                      : Colors.black87,
+                  fontSize: 20,
+                ),
               ),
               style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
                 fontWeight: FontWeight.w500,
-                color: AppPallete.grayLabel,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppPallete.grayLabel
+                    : Colors.black87,
                 fontSize: 20,
               ),
               controller: editBlogManager.blogSubTitle,
@@ -96,12 +115,16 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
                         'Add relevant categories for your blog',
                         style: AppTheme.darkThemeData.textTheme.displayMedium!
                             .copyWith(
-                          color: AppPallete.grayLight,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? AppPallete.grayLabel
+                              : Colors.black87,
                         ),
                       ),
                       IconButton(
                         icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                        color: AppPallete.grayLight,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppPallete.grayLabel
+                            : Colors.black87,
                         onPressed: () {
                           addBlogCategories(editBlogManager);
                         },
@@ -126,10 +149,13 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      backgroundColor: AppPallete.bottomSheetColor,
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? AppPallete.bottomSheetColor
+          : Colors.white,
       constraints: BoxConstraints.expand(
         height: MediaQuery.of(context).size.height * .75,
       ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setBottomState) {
@@ -143,7 +169,9 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
                     'Select relevant categories',
                     style:
                         AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
-                      color: AppPallete.grayLabel,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppPallete.grayLabel
+                          : Colors.black87,
                       fontSize: 19,
                     ),
                   ),

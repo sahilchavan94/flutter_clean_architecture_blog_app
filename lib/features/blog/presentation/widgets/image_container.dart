@@ -67,7 +67,7 @@ class _ImageContainerState extends State<ImageContainer> {
               color: AppPallete.grayDark,
               borderType: BorderType.RRect,
               radius: const Radius.circular(12),
-              dashPattern: const [8, 8],
+              dashPattern: const [6, 6],
               strokeWidth: 1.4,
               child: SizedBox(
                 height: widget.height,

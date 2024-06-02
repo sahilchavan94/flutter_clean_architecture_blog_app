@@ -1,4 +1,5 @@
 import 'package:blog_app/core/common/widgets/custom_image_view.dart';
+import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/blog/domain/entities/blog_entity.dart';
 import 'package:blog_app/features/blog/presentation/managers/edit_blog_manager.dart';
@@ -34,6 +35,13 @@ class _BlogReadViewState extends State<BlogReadView> {
         controller: scrollController,
         slivers: [
           SliverAppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+            ),
+            backgroundColor: Colors.black.withOpacity(.7),
             centerTitle: true,
             title: Text(
               widget.blogEntity.userEntity != null
@@ -41,6 +49,7 @@ class _BlogReadViewState extends State<BlogReadView> {
                   : 'Anonymous',
               style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
                 fontSize: 18,
+                color: Colors.white,
               ),
             ),
             pinned: true,
@@ -60,7 +69,10 @@ class _BlogReadViewState extends State<BlogReadView> {
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       "${(editBlogManager.currentBlogImage + 1).toString()}  /  ${widget.blogEntity.imageUrlList.length}",
-                      style: AppTheme.darkThemeData.textTheme.displaySmall,
+                      style: AppTheme.darkThemeData.textTheme.displaySmall!
+                          .copyWith(
+                        color: Colors.white,
+                      ),
                     ),
                   );
                 },
@@ -133,7 +145,8 @@ class _BlogReadViewState extends State<BlogReadView> {
 
           //poster details
           SliverToBoxAdapter(
-            child: SizedBox(
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
               width: MediaQuery.of(context).size.width * .8,
               child: ListTile(
                 leading: CustomImageView(
@@ -151,7 +164,6 @@ class _BlogReadViewState extends State<BlogReadView> {
                   style:
                       AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
                     fontSize: 17,
-                    color: Colors.white,
                   ),
                 ),
                 subtitle: Text(
@@ -161,7 +173,9 @@ class _BlogReadViewState extends State<BlogReadView> {
                   style:
                       AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
                     fontSize: 14,
-                    color: Colors.white54,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white54
+                        : Colors.black54,
                   ),
                 ),
               ),
@@ -186,8 +200,10 @@ class _BlogReadViewState extends State<BlogReadView> {
                 widget.blogEntity.blogContent,
                 style: AppTheme.darkThemeData.textTheme.titleLarge!.copyWith(
                   fontSize: 15,
-                  color: Colors.white,
                   fontWeight: FontWeight.w400,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
                 ),
               ),
             ),

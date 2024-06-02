@@ -38,7 +38,19 @@ class SeeOthersBlogsView extends StatelessWidget {
         slivers: [
           SliverAppBar(
             centerTitle: true,
-            title: Text("Read more by $posterFName"),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+            ),
+            backgroundColor: Colors.black.withOpacity(.7),
+            title: Text(
+              "Read more by $posterFName",
+              style: TextStyle().copyWith(
+                color: Colors.white,
+              ),
+            ),
             pinned: true,
             expandedHeight: MediaQuery.of(context).size.height * .4,
             flexibleSpace: FlexibleSpaceBar(
@@ -107,7 +119,7 @@ class SeeOthersBlogsView extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.20, vertical: 10),
+                  const EdgeInsets.symmetric(horizontal: 16.20, vertical: 25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -116,7 +128,9 @@ class SeeOthersBlogsView extends StatelessWidget {
                     style:
                         AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
                       fontWeight: FontWeight.w400,
-                      color: AppPallete.primaryColor,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppPallete.primaryColor
+                          : AppPallete.primaryLightColor,
                     ),
                   ),
                   Text(
@@ -155,7 +169,9 @@ class SeeOthersBlogsView extends StatelessWidget {
                     style:
                         AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
                       fontWeight: FontWeight.w400,
-                      color: AppPallete.primaryColor,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppPallete.primaryColor
+                          : AppPallete.primaryLightColor,
                     ),
                   ),
                   Text(
@@ -179,7 +195,7 @@ class SeeOthersBlogsView extends StatelessWidget {
                       (index) => CustomBlogWidget(
                         blogEntity: blogs[index],
                         padding: 0,
-                        isInHome: true,
+                        isInHome: false,
                       ),
                     ),
                   )

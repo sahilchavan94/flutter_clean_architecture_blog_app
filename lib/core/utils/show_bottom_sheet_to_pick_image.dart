@@ -10,7 +10,10 @@ void showBottomSheetToPickImage(
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      backgroundColor: AppPallete.bottomSheetColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? AppPallete.bottomSheetColor
+          : Colors.white,
       constraints: BoxConstraints.expand(
         height: MediaQuery.of(context).size.height * .285,
       ),
@@ -22,7 +25,9 @@ void showBottomSheetToPickImage(
               Text(
                 'Upload profile photo',
                 style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
-                  color: AppPallete.grayLabel,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? AppPallete.grayLabel
+                      : Colors.black87,
                   fontSize: 19,
                   fontWeight: FontWeight.w400,
                 ),
@@ -39,9 +44,11 @@ void showBottomSheetToPickImage(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       CupertinoIcons.photo_fill,
-                      color: AppPallete.grayLabel,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppPallete.grayLabel
+                          : Colors.black87,
                     ),
                     const SizedBox(
                       width: 10,
@@ -50,7 +57,9 @@ void showBottomSheetToPickImage(
                       'Gallery',
                       style: AppTheme.darkThemeData.textTheme.displayLarge!
                           .copyWith(
-                        color: AppPallete.grayLabel,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppPallete.grayLabel
+                            : Colors.black87,
                         fontSize: 16,
                       ),
                     )
@@ -73,9 +82,11 @@ void showBottomSheetToPickImage(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.camera_alt,
-                      color: AppPallete.grayLabel,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppPallete.grayLabel
+                          : Colors.black87,
                     ),
                     const SizedBox(
                       width: 10,
@@ -84,7 +95,9 @@ void showBottomSheetToPickImage(
                       'Camera',
                       style: AppTheme.darkThemeData.textTheme.displayLarge!
                           .copyWith(
-                        color: AppPallete.grayLabel,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppPallete.grayLabel
+                            : Colors.black87,
                         fontSize: 16,
                       ),
                     )

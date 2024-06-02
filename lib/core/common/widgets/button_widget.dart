@@ -34,14 +34,18 @@ class ButtonWidget extends StatelessWidget {
             color: isLoading == true
                 ? AppPallete.deactivatedBackgroundColor
                 : isActive
-                    ? Colors.white
+                    ? Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : AppPallete.primaryLightColor
                     : AppPallete.deactivatedBackgroundColor,
           ),
           child: isLoading
-              ? const Center(
+              ? Center(
                   heightFactor: .65,
                   child: CircularProgressIndicator(
-                    color: AppPallete.primaryColor,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? AppPallete.primaryColor
+                        : AppPallete.primaryLightColor,
                   ),
                 )
               : Text(

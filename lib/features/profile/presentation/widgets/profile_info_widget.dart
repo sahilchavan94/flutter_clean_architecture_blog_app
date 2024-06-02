@@ -118,9 +118,11 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                         },
                       );
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       CupertinoIcons.camera_fill,
-                      color: AppPallete.grayLabel,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppPallete.grayLabel
+                          : AppPallete.grayDark,
                     ),
                     iconSize: 20,
                   ),
@@ -136,14 +138,18 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
               '${currentUserData.userEntity.firstname.capitalize()} ${currentUserData.userEntity.lastname.capitalize()}',
               style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
                 fontWeight: FontWeight.w400,
-                color: AppPallete.grayLabel,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppPallete.grayLabel
+                    : AppPallete.grayDark,
               ),
             ),
             Text(
               currentUserData.userEntity.email,
               style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
                 fontWeight: FontWeight.w400,
-                color: AppPallete.tabLabelUnselectedColor,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppPallete.tabLabelUnselectedColor
+                    : AppPallete.grayLight,
                 height: 1,
               ),
             ),

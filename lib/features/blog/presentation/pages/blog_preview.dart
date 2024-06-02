@@ -54,7 +54,9 @@ class _BlogPreviewState extends State<BlogPreview> {
                               editBlogManager.blogTitle.text,
                               style: AppTheme
                                   .darkThemeData.textTheme.displayLarge!
-                                  .copyWith(),
+                                  .copyWith(
+                                fontSize: 28,
+                              ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -119,7 +121,9 @@ class _BlogPreviewState extends State<BlogPreview> {
                       editBlogManager.blogContent.text,
                       style: AppTheme.darkThemeData.textTheme.displayMedium!
                           .copyWith(
-                        color: AppPallete.grayLabel,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppPallete.grayLabel
+                            : Colors.black87,
                       ),
                     ),
                   ],

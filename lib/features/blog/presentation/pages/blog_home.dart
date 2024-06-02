@@ -71,11 +71,17 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
                     children: [
                       Row(
                         children: [
-                          Image.asset(
-                            'assets/images/blog_logo.png',
-                            height: 32,
-                            width: 32,
-                          ),
+                          Theme.of(context).brightness == Brightness.dark
+                              ? Image.asset(
+                                  'assets/images/blog_logo.png',
+                                  height: 32,
+                                  width: 32,
+                                )
+                              : Image.asset(
+                                  'assets/images/blog_logo_light_2.png',
+                                  height: 32,
+                                  width: 32,
+                                ),
                           const SizedBox(
                             width: 8,
                           ),
@@ -93,7 +99,9 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
                     AppStrings.homePageString,
                     style:
                         AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
-                      color: AppPallete.grayLight,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppPallete.grayLight
+                          : AppPallete.grayDark,
                       fontSize: 14,
                       fontWeight: FontWeight.w300,
                     ),
@@ -148,9 +156,6 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
             ),
             body: Container(
               padding: const EdgeInsets.all(2.5),
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * .008,
-              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,

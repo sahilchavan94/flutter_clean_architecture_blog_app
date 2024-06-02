@@ -78,8 +78,15 @@ class _ProfileViewState extends State<ProfileView> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                backgroundColor: AppPallete.bottomSheetColor,
-                                surfaceTintColor: AppPallete.bottomSheetColor,
+                                backgroundColor: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? AppPallete.bottomSheetColor
+                                    : Colors.white,
+                                surfaceTintColor:
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? AppPallete.bottomSheetColor
+                                        : Colors.white,
                                 content: Container(
                                   padding: const EdgeInsets.all(12),
                                   width:
@@ -96,6 +103,10 @@ class _ProfileViewState extends State<ProfileView> {
                                             .displayLarge!
                                             .copyWith(
                                           fontSize: 18,
+                                          color: Theme.of(context).brightness !=
+                                                  Brightness.dark
+                                              ? AppPallete.grayDark
+                                              : Colors.white,
                                         ),
                                         textAlign: TextAlign.center,
                                       ),
@@ -110,10 +121,15 @@ class _ProfileViewState extends State<ProfileView> {
                                             onTap: () {
                                               Navigator.pop(context);
                                             },
-                                            child: const Text(
+                                            child: Text(
                                               "No",
                                               style: TextStyle(
                                                 fontSize: 16,
+                                                color: Theme.of(context)
+                                                            .brightness !=
+                                                        Brightness.dark
+                                                    ? AppPallete.grayDark
+                                                    : Colors.white,
                                               ),
                                             ),
                                           ),

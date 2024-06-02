@@ -99,17 +99,28 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        'assets/images/blog_logo.png',
-                        height: 32,
-                        width: 32,
-                      ),
+                      Theme.of(context).brightness == Brightness.dark
+                          ? Image.asset(
+                              'assets/images/blog_logo.png',
+                              height: 32,
+                              width: 32,
+                            )
+                          : Image.asset(
+                              'assets/images/blog_logo_light_2.png',
+                              height: 32,
+                              width: 32,
+                            ),
                       const SizedBox(
                         width: 10,
                       ),
                       Text(
                         'Get Started',
-                        style: AppTheme.darkThemeData.textTheme.displayLarge,
+                        style: AppTheme.darkThemeData.textTheme.displayLarge!
+                            .copyWith(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? AppPallete.grayLabel
+                              : AppPallete.grayDark,
+                        ),
                       ),
                     ],
                   ),
@@ -122,7 +133,9 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
                     AppStrings.signUpString,
                     style:
                         AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
-                      color: AppPallete.grayLight,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppPallete.grayLabel
+                          : AppPallete.grayDark,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),
@@ -229,9 +242,9 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
                       );
                     },
                     child: RichText(
-                      text: const TextSpan(
+                      text: TextSpan(
                         children: [
-                          TextSpan(
+                          const TextSpan(
                             text: 'Already have an account? ',
                             style: TextStyle(
                               color: AppPallete.grayLight,
@@ -240,7 +253,10 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
                           TextSpan(
                             text: 'Sign In',
                             style: TextStyle(
-                              color: AppPallete.primaryColor,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? AppPallete.primaryColor
+                                  : AppPallete.primaryLightColor,
                               fontWeight: FontWeight.w500,
                             ),
                           )

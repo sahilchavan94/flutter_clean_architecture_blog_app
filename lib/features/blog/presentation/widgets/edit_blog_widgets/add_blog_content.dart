@@ -26,26 +26,43 @@ class _AddBlogContentWidgetState extends State<AddBlogContentWidget> {
               ),
               TextFormField(
                 controller: editBlogManager.blogContent,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
-                  enabledBorder: OutlineInputBorder(
+                  enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
-                  errorBorder: OutlineInputBorder(
+                  errorBorder: const OutlineInputBorder(
                     borderSide: BorderSide.none,
+                  ),
+                  helperStyle:
+                      AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? AppPallete.grayLabel
+                        : Colors.black87,
+                    fontSize: 20,
                   ),
                   hintText:
                       'Blog content ( ex: today we are going to get an introduction on animation basics )',
+                  hintStyle:
+                      AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? AppPallete.grayLabel
+                        : Colors.black87,
+                  ),
                   contentPadding: EdgeInsets.zero,
                 ),
                 style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
                   fontWeight: FontWeight.w100,
-                  color: AppPallete.grayLabel,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? AppPallete.grayLabel
+                      : Colors.black87,
                   fontFamily: GoogleFonts.nunito().fontFamily,
                 ),
                 maxLines: null,

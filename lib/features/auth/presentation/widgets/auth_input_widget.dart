@@ -41,7 +41,9 @@ class _AuthInputWidgetState extends State<AuthInputWidget> {
           Text(
             widget.labelText,
             style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
-              color: AppPallete.grayLabel,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? AppPallete.grayLabel
+                  : AppPallete.grayDark,
             ),
           ),
           const SizedBox(
@@ -49,14 +51,18 @@ class _AuthInputWidgetState extends State<AuthInputWidget> {
           ),
           TextFormField(
             style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
-              color: AppPallete.inputTextColor,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? AppPallete.inputTextColor
+                  : AppPallete.grayDark,
               fontSize: 15,
             ),
             validator: (val) {
               final validationResult = widget.validator(val);
               return validationResult;
             },
-            cursorColor: Colors.white,
+            cursorColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black,
             cursorWidth: .5,
             cursorErrorColor: Colors.white,
             controller: widget.textEditingController,

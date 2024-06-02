@@ -29,7 +29,9 @@ class _PersonalInterestsWidgetState extends State<PersonalInterestsWidget> {
           'Personal Interests',
           style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
             fontWeight: FontWeight.w400,
-            color: AppPallete.primaryColor,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? AppPallete.primaryColor
+                : AppPallete.primaryLightColor,
           ),
         ),
         Text(
@@ -37,7 +39,9 @@ class _PersonalInterestsWidgetState extends State<PersonalInterestsWidget> {
           style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
             fontWeight: FontWeight.w400,
             fontSize: 14,
-            color: AppPallete.tabLabelUnselectedColor,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? AppPallete.tabLabelUnselectedColor
+                : AppPallete.grayDark,
             height: 1,
           ),
           maxLines: 1,

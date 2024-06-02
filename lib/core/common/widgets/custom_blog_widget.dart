@@ -13,6 +13,7 @@ import 'package:blog_app/features/profile/presentation/widgets/profile_info_widg
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomBlogWidget extends StatefulWidget {
@@ -94,34 +95,53 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                           ),
                         ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 16.0,
-                    horizontal: 20,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.blogEntity.blogTitle,
-                        style: AppTheme.darkThemeData.textTheme.displayLarge!
-                            .copyWith(
-                          fontSize: 20.5,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Container(
+                      width: double.maxFinite,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Color.fromRGBO(0, 0, 0, 1),
+                            Color.fromRGBO(0, 0, 0, 0),
+                          ],
                         ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
                       ),
-                      Text(
-                        widget.blogEntity.blogSubTitle,
-                        style: AppTheme.darkThemeData.textTheme.displayMedium!
-                            .copyWith(
-                          fontSize: 15,
-                          color: Colors.white70,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.blogEntity.blogTitle,
+                              style: AppTheme
+                                  .darkThemeData.textTheme.displayLarge!
+                                  .copyWith(
+                                fontSize: 20.5,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                            Text(
+                              widget.blogEntity.blogSubTitle,
+                              style: AppTheme
+                                  .darkThemeData.textTheme.displayMedium!
+                                  .copyWith(
+                                fontSize: 15,
+                                color: Colors.white70,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            )
+                          ],
                         ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      )
-                    ],
+                      ),
+                    ),
                   ),
                 ),
                 Positioned(
@@ -172,7 +192,10 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
-                              color: Colors.black,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.light
+                                  ? Colors.white
+                                  : Colors.black,
                             ),
                             child: const Icon(
                               CupertinoIcons.heart,
@@ -209,7 +232,12 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                     context: context,
                     isScrollControlled: true,
                     showDragHandle: true,
-                    backgroundColor: AppPallete.bottomSheetColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                            ? AppPallete.bottomSheetColor
+                            : Colors.white,
                     constraints: BoxConstraints.expand(
                       height: MediaQuery.of(context).size.height * .4,
                     ),
@@ -238,7 +266,10 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                                 .darkThemeData.textTheme.displayLarge!
                                 .copyWith(
                               fontWeight: FontWeight.w400,
-                              color: AppPallete.primaryColor,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? AppPallete.primaryColor
+                                  : AppPallete.primaryLightColor,
                               overflow: TextOverflow.ellipsis,
                             ),
                             maxLines: 2,
@@ -252,7 +283,10 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                                 .darkThemeData.textTheme.displayMedium!
                                 .copyWith(
                               fontWeight: FontWeight.w400,
-                              color: AppPallete.tabLabelUnselectedColor,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? AppPallete.tabLabelUnselectedColor
+                                  : AppPallete.grayDark,
                               height: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -267,7 +301,10 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                                 .darkThemeData.textTheme.displayMedium!
                                 .copyWith(
                               fontWeight: FontWeight.w400,
-                              color: AppPallete.tabLabelUnselectedColor,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? AppPallete.tabLabelUnselectedColor
+                                  : AppPallete.grayDark,
                               height: 1,
                             ),
                           ),
@@ -331,7 +368,9 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                     : 'Anonymous',
                 style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
                   fontSize: 17,
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
                 ),
               ),
               subtitle: Text(
@@ -340,7 +379,9 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                     : 'Uploaded date not found',
                 style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
                   fontSize: 14,
-                  color: Colors.white54,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white54
+                      : Colors.black54,
                 ),
               ),
             ),
