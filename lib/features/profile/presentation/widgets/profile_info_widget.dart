@@ -85,8 +85,14 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                           child: LinearProgressIndicator(
                             borderRadius: BorderRadius.circular(50),
                             minHeight: double.maxFinite,
-                            color: Colors.black12,
-                            backgroundColor: Colors.grey.shade900,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.black12
+                                    : Colors.grey.shade200,
+                            backgroundColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey.shade900
+                                    : Colors.grey.shade100,
                           ),
                         ),
                       )

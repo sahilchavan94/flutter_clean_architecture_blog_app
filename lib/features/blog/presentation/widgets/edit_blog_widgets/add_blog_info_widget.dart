@@ -206,18 +206,29 @@ class _AddBlogInfoWidgetState extends State<AddBlogInfoWidget> {
                                   surfaceTintColor:
                                       ColorManipulation.reduceAlpha(
                                     CategoryList.categoryColors[list[index]]!,
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? 230
+                                        : 190,
                                   ),
                                   backgroundColor:
                                       ColorManipulation.reduceAlpha(
                                     CategoryList.categoryColors[list[index]]!,
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? 230
+                                        : 190,
                                   ),
                                 ),
                                 IconButton(
                                   icon: editBlogManager.blogCategories
                                           .contains(list[index])
-                                      ? const Icon(
+                                      ? Icon(
                                           Icons.radio_button_checked,
-                                          color: AppPallete.primaryColor,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? AppPallete.primaryColor
+                                              : AppPallete.primaryLightColor,
                                         )
                                       : const Icon(
                                           Icons.radio_button_unchecked,

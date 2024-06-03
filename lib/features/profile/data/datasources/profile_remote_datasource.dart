@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -22,11 +23,13 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   Future<String> generalUpload(File file, String uniquePath) async {
     final profilePathRef =
         firebaseStorage.ref().child('profileimages/$uniquePath');
+
     try {
       final response = await profilePathRef.putFile(file);
       //return the uploaded profile url
       return response.ref.getDownloadURL();
     } catch (e) {
+      log("error1 is $e");
       throw ServerException(error: e.toString());
     }
   }
@@ -40,6 +43,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       );
       return 'Profile picture updated';
     } catch (e) {
+      log("error2 is $e");
       throw ServerException(error: e.toString());
     }
   }

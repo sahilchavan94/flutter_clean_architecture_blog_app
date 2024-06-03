@@ -50,6 +50,7 @@ dependencies:
   path_provider:
   uuid: ^4.4.0
   internet_connection_checker: ^1.0.0+1
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_lints: ^3.0.0

@@ -1,3 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:developer';
+
+import 'package:blog_app/core/common/cubits/managers/theme_manager.dart';
 import 'package:blog_app/core/common/widgets/custom_error_widget.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
@@ -7,6 +12,7 @@ import 'package:blog_app/features/profile/presentation/widgets/personal_interest
 import 'package:blog_app/features/profile/presentation/widgets/profile_info_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -24,6 +30,39 @@ class _ProfileViewState extends State<ProfileView> {
         title: const Text(
           'Profile',
         ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () async {
+              try {
+                if (context.read<ThemeManager>().currentTheme == 'dark') {
+                  Provider.of<ThemeManager>(context, listen: false)
+                      .changeTheme('light');
+                } else {
+                  Provider.of<ThemeManager>(context, listen: false)
+                      .changeTheme('dark');
+                }
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('App theme changed'),
+                  ),
+                );
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Failed to change the app theme'),
+                  ),
+                );
+              }
+            },
+            icon: Theme.of(context).brightness == Brightness.dark
+                ? const Icon(
+                    Icons.light_mode_rounded,
+                  )
+                : const Icon(
+                    Icons.dark_mode_rounded,
+                  ),
+          )
+        ],
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {

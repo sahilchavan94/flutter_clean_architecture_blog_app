@@ -83,4 +83,14 @@ class EditBlogManager extends ChangeNotifier {
 
     return "";
   }
+
+  void resetEditBlog() {
+    blogImageList = [];
+    blogTitle.dispose();
+    blogSubTitle.dispose();
+    blogContent.dispose();
+    blogCategories = [];
+    resetIndexes();
+    notifyListeners();
+  }
 }

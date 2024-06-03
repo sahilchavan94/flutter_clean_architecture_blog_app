@@ -45,6 +45,7 @@ class _AddNewBlogState extends State<AddNewBlog> with TickerProviderStateMixin {
               content: Text('Blog uploaded successfully'),
             ),
           );
+          context.read<EditBlogManager>().resetEditBlog();
         }
         if (state is BlogFailure) {
           ScaffoldMessenger.of(context).showSnackBar(

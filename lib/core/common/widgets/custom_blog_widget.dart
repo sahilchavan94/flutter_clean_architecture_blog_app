@@ -74,7 +74,10 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
                             useOldImageOnUrlChange: true,
-                            color: Colors.black45,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.black45
+                                    : Colors.black12,
                             colorBlendMode: BlendMode.darken,
                             errorWidget: (context, url, error) {
                               return const CustomImageError();

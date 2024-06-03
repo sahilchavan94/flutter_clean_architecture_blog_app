@@ -1,5 +1,6 @@
 //global object for getit
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
+import 'package:blog_app/core/common/cubits/managers/theme_manager.dart';
 import 'package:blog_app/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:blog_app/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:blog_app/features/auth/domain/repositories/auth_repository.dart';
@@ -35,6 +36,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 GetIt serviceLocator = GetIt.instance;
 Future<void> initDependencies() async {
@@ -57,8 +59,11 @@ Future<void> initDependencies() async {
     path: (await getApplicationDocumentsDirectory()).path,
   );
 
-  //register hive box
+  //register hive box and shared prefs
   serviceLocator.registerLazySingleton(() => Hive.box('blogs'));
+  serviceLocator.registerLazySingleton(
+    () async => await SharedPreferences.getInstance(),
+  );
 
   //core
   _initCubitsAndProviders();
@@ -73,6 +78,9 @@ void _initCubitsAndProviders() {
   );
   serviceLocator.registerLazySingleton<EditBlogManager>(
     () => EditBlogManager(),
+  );
+  serviceLocator.registerLazySingleton<ThemeManager>(
+    () => ThemeManager(),
   );
 }
 

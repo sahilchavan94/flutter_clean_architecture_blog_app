@@ -224,26 +224,24 @@ class AppTheme {
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
-        borderSide: const BorderSide(
-          color: AppPallete.grayDark,
-        ),
+        borderSide: const BorderSide(color: AppPallete.grayLight),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
         borderSide: const BorderSide(
-          color: AppPallete.grayDark,
+          color: AppPallete.grayLight,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
         borderSide: const BorderSide(
-          color: AppPallete.grayDark,
+          color: AppPallete.grayLight,
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
         borderSide: const BorderSide(
-          color: AppPallete.grayDark,
+          color: AppPallete.grayLight,
         ),
       ),
       errorStyle: TextStyle(

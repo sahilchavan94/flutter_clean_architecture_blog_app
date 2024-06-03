@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
+import 'package:blog_app/core/common/cubits/managers/theme_manager.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/signup_view.dart';
 import 'package:blog_app/features/blog/presentation/blocs/blog/blog_bloc.dart';
@@ -57,6 +60,9 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) => serviceLocator<EditBlogManager>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => serviceLocator<ThemeManager>(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -81,8 +87,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightThemeData,
-      darkTheme: AppTheme.darkThemeData,
+      theme: context.watch<ThemeManager>().currentTheme == 'dark'
+          ? AppTheme.darkThemeData
+          : context.watch<ThemeManager>().currentTheme == 'light'
+              ? AppTheme.lightThemeData
+              : AppTheme.lightThemeData,
       themeMode: ThemeMode.system,
       home: BlocSelector<CurrentUserCubit, CurrentUserState, bool>(
         selector: (state) => state is CurrentUserDataFetched,

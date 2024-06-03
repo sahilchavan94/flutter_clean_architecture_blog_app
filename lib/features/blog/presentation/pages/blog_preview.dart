@@ -1,3 +1,4 @@
+import 'package:blog_app/core/common/cubits/managers/theme_manager.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/blog/presentation/managers/edit_blog_manager.dart';
@@ -81,9 +82,11 @@ class _BlogPreviewState extends State<BlogPreview> {
                     right: 35,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: editBlogManager.blogImageList
-                                    .elementAt(editBlogManager.currentImage) ==
-                                null
+                        color: editBlogManager.blogImageList.elementAt(
+                                        editBlogManager.currentImage) ==
+                                    null &&
+                                context.read<ThemeManager>().currentTheme ==
+                                    'dark'
                             ? Colors.white.withOpacity(.1)
                             : Colors.black.withOpacity(.25),
                         borderRadius: BorderRadius.circular(10),
@@ -94,6 +97,15 @@ class _BlogPreviewState extends State<BlogPreview> {
                       ),
                       child: Text(
                         "${(editBlogManager.currentImage + 1).toString()}  /  ${editBlogManager.blogImageList.length}",
+                        style: TextStyle(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : editBlogManager.blogImageList[
+                                          editBlogManager.currentImage] !=
+                                      null
+                                  ? Colors.white
+                                  : Colors.black87,
+                        ),
                       ),
                     ),
                   ),
@@ -123,7 +135,7 @@ class _BlogPreviewState extends State<BlogPreview> {
                           .copyWith(
                         color: Theme.of(context).brightness == Brightness.dark
                             ? AppPallete.grayLabel
-                            : Colors.black87,
+                            : Colors.black,
                       ),
                     ),
                   ],

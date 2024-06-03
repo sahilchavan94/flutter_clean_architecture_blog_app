@@ -42,7 +42,6 @@ class _PersonalInterestsWidgetState extends State<PersonalInterestsWidget> {
             color: Theme.of(context).brightness == Brightness.dark
                 ? AppPallete.tabLabelUnselectedColor
                 : AppPallete.grayDark,
-            height: 1,
           ),
           maxLines: 1,
         ),

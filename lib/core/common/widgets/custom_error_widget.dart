@@ -24,6 +24,9 @@ class CustomErrorWidget extends StatelessWidget {
             message == null ? 'Something went wrong' : message!,
             style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
               fontSize: 17,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black,
             ),
           )
         ],

@@ -32,9 +32,11 @@ class BlogInterestWrapper extends StatelessWidget {
           side: BorderSide.none,
           surfaceTintColor: ColorManipulation.reduceAlpha(
             CategoryList.categoryColors[CategoryList.blogCategories[index]]!,
+            Theme.of(context).brightness == Brightness.dark ? 230 : 190,
           ),
           backgroundColor: ColorManipulation.reduceAlpha(
             CategoryList.categoryColors[CategoryList.blogCategories[index]]!,
+            Theme.of(context).brightness == Brightness.dark ? 230 : 190,
           ),
         ),
       ),
