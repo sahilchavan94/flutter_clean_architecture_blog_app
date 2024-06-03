@@ -40,7 +40,7 @@ class _BlogReadViewState extends State<BlogReadView> {
               },
               icon: const Icon(Icons.arrow_back, color: Colors.white),
             ),
-            backgroundColor: Colors.black.withOpacity(.7),
+            backgroundColor: Colors.black.withOpacity(.65),
             centerTitle: true,
             title: Text(
               widget.blogEntity.userEntity != null
@@ -184,7 +184,8 @@ class _BlogReadViewState extends State<BlogReadView> {
           //blog categories
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 7),
               child: BlogInterestWrapper(
                 list: widget.blogEntity.blogCategories,
               ),

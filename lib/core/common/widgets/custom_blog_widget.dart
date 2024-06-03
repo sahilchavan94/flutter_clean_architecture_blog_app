@@ -1,3 +1,4 @@
+import 'package:blog_app/core/common/cubits/managers/theme_manager.dart';
 import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/common/widgets/image_error_widget.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
@@ -13,7 +14,6 @@ import 'package:blog_app/features/profile/presentation/widgets/profile_info_widg
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomBlogWidget extends StatefulWidget {
@@ -116,7 +116,9 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 16.0, horizontal: 20),
+                          vertical: 16.0,
+                          horizontal: 20,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

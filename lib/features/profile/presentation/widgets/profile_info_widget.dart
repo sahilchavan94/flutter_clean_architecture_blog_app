@@ -8,6 +8,7 @@ import 'package:blog_app/core/utils/pick_image.dart';
 import 'package:blog_app/core/utils/show_bottom_sheet_to_pick_image.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:blog_app/features/profile/presentation/pages/profile_image_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -96,12 +97,42 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                           ),
                         ),
                       )
-                    : CustomImageView(
-                        width: 100,
-                        height: 100,
-                        radius: BorderRadius.circular(50),
-                        fit: BoxFit.cover,
-                        imagePath: currentUserData.userEntity.profileImageUrl,
+                    : GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProfileImageView(
+                                imageUrl:
+                                    currentUserData.userEntity.profileImageUrl,
+                                callback: () {
+                                  showBottomSheetToPickImage(
+                                    context,
+                                    () {
+                                      selectImage(
+                                        ImageSource.gallery,
+                                        currentUserData.userEntity.uid,
+                                      );
+                                    },
+                                    () {
+                                      selectImage(
+                                        ImageSource.camera,
+                                        currentUserData.userEntity.uid,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                        child: CustomImageView(
+                          width: 100,
+                          height: 100,
+                          radius: BorderRadius.circular(50),
+                          fit: BoxFit.cover,
+                          imagePath: currentUserData.userEntity.profileImageUrl,
+                        ),
                       ),
                 Positioned(
                   bottom: -18,

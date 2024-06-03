@@ -26,8 +26,10 @@ final class BlogGetAllBlogLoading extends BlogState {}
 
 final class BlogGetAllBlogSuccess extends BlogState {
   final List<BlogEntity> blogList;
+  final List<BlogEntity> personalBlogs;
 
   BlogGetAllBlogSuccess({
     required this.blogList,
+    required this.personalBlogs,
   });
 }

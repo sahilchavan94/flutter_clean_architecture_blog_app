@@ -82,9 +82,15 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
             return e.posterId != event.uid;
           },
         ).toList();
+        List<BlogEntity> personalBlogs = r.filter(
+          (e) {
+            return e.posterId == event.uid;
+          },
+        ).toList();
         emit(
           BlogGetAllBlogSuccess(
             blogList: blogList,
+            personalBlogs: personalBlogs,
           ),
         );
       },

@@ -1,4 +1,5 @@
 import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
+import 'package:blog_app/core/common/cubits/managers/theme_manager.dart';
 import 'package:blog_app/core/common/widgets/custom_error_widget.dart';
 import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/strings/strings.dart';
@@ -69,28 +70,17 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Theme.of(context).brightness == Brightness.dark
-                              ? Image.asset(
-                                  'assets/images/blog_logo.png',
-                                  height: 32,
-                                  width: 32,
-                                )
-                              : Image.asset(
-                                  'assets/images/blog_logo_light_2.png',
-                                  height: 32,
-                                  width: 32,
-                                ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            'Discover',
-                            style:
-                                AppTheme.darkThemeData.textTheme.displayLarge,
-                          ),
-                        ],
+                      Text(
+                        'Discover',
+                        style: AppTheme.darkThemeData.textTheme.displayLarge!
+                            .copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 23.5,
+                          color: context.read<ThemeManager>().currentTheme ==
+                                  'dark'
+                              ? AppPallete.primaryColor
+                              : AppPallete.primaryLightColor,
+                        ),
                       ),
                     ],
                   ),

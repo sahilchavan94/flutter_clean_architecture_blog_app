@@ -22,34 +22,37 @@ class _PersonalInterestsWidgetState extends State<PersonalInterestsWidget> {
             .userEntity
             .interestedCategories;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Personal Interests',
-          style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
-            fontWeight: FontWeight.w400,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? AppPallete.primaryColor
-                : AppPallete.primaryLightColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Personal Interests',
+            style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? AppPallete.primaryColor
+                  : AppPallete.primaryLightColor,
+            ),
           ),
-        ),
-        Text(
-          AppStrings.personalInterestString,
-          style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
-            fontWeight: FontWeight.w400,
-            fontSize: 14,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? AppPallete.tabLabelUnselectedColor
-                : AppPallete.grayDark,
+          Text(
+            AppStrings.personalInterestString,
+            style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? AppPallete.tabLabelUnselectedColor
+                  : AppPallete.grayDark,
+            ),
+            maxLines: 1,
           ),
-          maxLines: 1,
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        BlogInterestWrapper(list: list),
-      ],
+          const SizedBox(
+            height: 8,
+          ),
+          BlogInterestWrapper(list: list),
+        ],
+      ),
     );
   }
 }

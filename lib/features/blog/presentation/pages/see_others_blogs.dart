@@ -88,8 +88,8 @@ class SeeOthersBlogsView extends StatelessWidget {
                               style: AppTheme
                                   .darkThemeData.textTheme.displayLarge!
                                   .copyWith(
-                                height: 1.2,
-                                fontSize: 30,
+                                height: 1.05,
+                                fontSize: 23,
                               ),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
