@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:blog_app/core/common/cubits/cubit/current_user_cubit.dart';
 import 'package:blog_app/core/common/cubits/managers/theme_manager.dart';
 import 'package:blog_app/core/common/widgets/custom_error_widget.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
@@ -9,6 +10,7 @@ import 'package:blog_app/features/auth/presentation/pages/signin_view.dart';
 import 'package:blog_app/features/profile/presentation/widgets/personal_blogs.dart';
 import 'package:blog_app/features/profile/presentation/widgets/personal_interests_widget.dart';
 import 'package:blog_app/features/profile/presentation/widgets/profile_info_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -96,126 +98,139 @@ class _ProfileViewState extends State<ProfileView> {
             );
           }
           if (state is AuthSuccess) {
-            return SingleChildScrollView(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: MediaQuery.of(context).size.height * .06),
-                    const ProfileInfoWidget(),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    const PersonalInterestsWidget(),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    const PersonalBlogsWidget(),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              backgroundColor: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? AppPallete.bottomSheetColor
-                                  : Colors.white,
-                              surfaceTintColor: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? AppPallete.bottomSheetColor
-                                  : Colors.white,
-                              content: Container(
-                                padding: const EdgeInsets.all(12),
-                                width: MediaQuery.of(context).size.width * .85,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      "Are you sure to sign out from this account ?",
-                                      style: AppTheme
-                                          .darkThemeData.textTheme.displayLarge!
-                                          .copyWith(
-                                        fontSize: 18,
-                                        color: Theme.of(context).brightness !=
-                                                Brightness.dark
-                                            ? AppPallete.grayDark
-                                            : Colors.white,
+            return ScrollConfiguration(
+              behavior: const CupertinoScrollBehavior(),
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * .06),
+                      Hero(
+                        tag: (context.read<CurrentUserCubit>().state
+                                as CurrentUserDataFetched)
+                            .userEntity
+                            .profileImageUrl,
+                        child: const ProfileInfoWidget(),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      const PersonalInterestsWidget(),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      const PersonalBlogsWidget(),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? AppPallete.bottomSheetColor
+                                    : Colors.white,
+                                surfaceTintColor:
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? AppPallete.bottomSheetColor
+                                        : Colors.white,
+                                content: Container(
+                                  padding: const EdgeInsets.all(12),
+                                  width:
+                                      MediaQuery.of(context).size.width * .85,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const SizedBox(
+                                        height: 15,
                                       ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    const SizedBox(
-                                      height: 35,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text(
-                                            "No",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Theme.of(context)
-                                                          .brightness !=
-                                                      Brightness.dark
-                                                  ? AppPallete.grayDark
-                                                  : Colors.white,
+                                      Text(
+                                        "Are you sure to sign out from this account ?",
+                                        style: AppTheme.darkThemeData.textTheme
+                                            .displayLarge!
+                                            .copyWith(
+                                          fontSize: 18,
+                                          color: Theme.of(context).brightness !=
+                                                  Brightness.dark
+                                              ? AppPallete.grayDark
+                                              : Colors.white,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(
+                                        height: 35,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text(
+                                              "No",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Theme.of(context)
+                                                            .brightness !=
+                                                        Brightness.dark
+                                                    ? AppPallete.grayDark
+                                                    : Colors.white,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Container(
-                                          height: 20,
-                                          width: .5,
-                                          color: AppPallete.grayLabel,
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.pop(context);
-                                            context
-                                                .read<AuthBloc>()
-                                                .add(AuthSignOut());
-                                          },
-                                          child: const Text(
-                                            "Yes",
-                                            style: TextStyle(
-                                              color: AppPallete.errorColor,
-                                              fontSize: 16,
+                                          Container(
+                                            height: 20,
+                                            width: .5,
+                                            color: AppPallete.grayLabel,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                              context
+                                                  .read<AuthBloc>()
+                                                  .add(AuthSignOut());
+                                            },
+                                            child: const Text(
+                                              "Yes",
+                                              style: TextStyle(
+                                                color: AppPallete.errorColor,
+                                                fontSize: 16,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 25),
-                        child: Text(
-                          'Sign out',
-                          style: AppTheme.darkThemeData.textTheme.displayMedium!
-                              .copyWith(color: AppPallete.errorColor),
+                              );
+                            },
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 25),
+                          child: Text(
+                            'Sign out',
+                            style: AppTheme
+                                .darkThemeData.textTheme.displayMedium!
+                                .copyWith(color: AppPallete.errorColor),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );

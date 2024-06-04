@@ -1,4 +1,3 @@
-import 'package:blog_app/core/common/cubits/managers/theme_manager.dart';
 import 'package:blog_app/core/common/widgets/custom_image_view.dart';
 import 'package:blog_app/core/common/widgets/image_error_widget.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
@@ -44,7 +43,7 @@ class _CustomBlogWidgetState extends State<CustomBlogWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: widget.padding ?? 12,
+        horizontal: widget.padding ?? 5,
         vertical: 7.5,
       ),
       child: Column(

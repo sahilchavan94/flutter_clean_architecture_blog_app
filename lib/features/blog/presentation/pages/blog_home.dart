@@ -62,7 +62,7 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
         if (state is AuthSuccess) {
           return Scaffold(
             appBar: AppBar(
-              toolbarHeight: 90,
+              toolbarHeight: 65,
               title: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,31 +71,31 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Discover',
+                        'Flutterblogs',
                         style: AppTheme.darkThemeData.textTheme.displayLarge!
                             .copyWith(
                           fontWeight: FontWeight.w600,
                           fontSize: 23.5,
-                          color: context.read<ThemeManager>().currentTheme ==
+                          color: context.watch<ThemeManager>().currentTheme ==
                                   'dark'
-                              ? AppPallete.primaryColor
+                              ? Colors.white
                               : AppPallete.primaryLightColor,
                         ),
                       ),
                     ],
                   ),
-                  Text(
-                    textAlign: TextAlign.start,
-                    AppStrings.homePageString,
-                    style:
-                        AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? AppPallete.grayLight
-                          : AppPallete.grayDark,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
+                  // Text(
+                  //   textAlign: TextAlign.start,
+                  //   AppStrings.homePageString,
+                  //   style:
+                  //       AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
+                  //     color: Theme.of(context).brightness == Brightness.dark
+                  //         ? AppPallete.grayLight
+                  //         : AppPallete.grayDark,
+                  //     fontSize: 14,
+                  //     fontWeight: FontWeight.w300,
+                  //   ),
+                  // ),
                 ],
               ),
               actions: [
@@ -156,6 +156,9 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
                       Text('Favourites'),
                     ],
                     controller: _tabController,
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   Expanded(
                     child: TabBarView(

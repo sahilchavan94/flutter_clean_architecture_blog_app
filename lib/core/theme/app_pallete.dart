@@ -19,7 +19,7 @@ class AppPallete {
   static const Color scaffoldBackGroundLightColor = Colors.white;
   static const Color deactivatedBackgroundLightColor = Color(0XFFF0F0F0);
   static const Color deactivatedTextLightColor = Color(0XFFB0B0B0);
-  static const Color primaryLightColor = Color(0XFF2F8F02);
+  static const Color primaryLightColor = Color(0XFF128C7E);
   static const Color errorLightColor = Color(0XFFFF4D4D);
   static const Color inputTextLightColor = Color.fromARGB(255, 30, 30, 30);
   static const Color tabLabelUnselectedColorLight = Color(0XFFB0B0B0);

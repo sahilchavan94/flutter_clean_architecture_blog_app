@@ -1,6 +1,5 @@
 import 'package:blog_app/core/common/widgets/custom_blog_widget.dart';
 import 'package:blog_app/core/common/widgets/custom_error_widget.dart';
-import 'package:blog_app/core/strings/strings.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/features/blog/presentation/blocs/blog/blog_bloc.dart';
@@ -13,7 +12,7 @@ class PersonalBlogsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,7 +37,7 @@ class PersonalBlogsWidget extends StatelessWidget {
             maxLines: 1,
           ),
           const SizedBox(
-            height: 10,
+            height: 6,
           ),
           BlocBuilder<BlogBloc, BlogState>(
             builder: (context, state) {

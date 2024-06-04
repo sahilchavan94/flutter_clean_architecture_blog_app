@@ -23,7 +23,7 @@ class _PersonalInterestsWidgetState extends State<PersonalInterestsWidget> {
             .interestedCategories;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 7.5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -46,6 +46,7 @@ class _PersonalInterestsWidgetState extends State<PersonalInterestsWidget> {
                   : AppPallete.grayDark,
             ),
             maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(
             height: 8,
