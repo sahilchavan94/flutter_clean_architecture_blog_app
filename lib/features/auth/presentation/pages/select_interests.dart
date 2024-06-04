@@ -1,3 +1,4 @@
+import 'package:blog_app/core/common/cubits/managers/theme_manager.dart';
 import 'package:blog_app/core/common/widgets/button_widget.dart';
 import 'package:blog_app/core/lists/category_list.dart';
 import 'package:blog_app/core/strings/strings.dart';
@@ -49,23 +50,11 @@ class _SelectInterestsState extends State<SelectInterests> {
           appBar: AppBar(
             toolbarHeight: MediaQuery.of(context).size.height * .09,
             title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/images/blog_logo.png',
-                      height: 32,
-                      width: 32,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Select Interests',
-                      style: AppTheme.darkThemeData.textTheme.displayLarge,
-                    ),
-                  ],
+                Text(
+                  'Select Interests',
+                  style: AppTheme.darkThemeData.textTheme.displayLarge,
                 ),
                 Text(
                   AppStrings.selectInterestsString,
@@ -143,11 +132,15 @@ class _SelectInterestsState extends State<SelectInterests> {
                             children: [
                               Text(
                                 currentCategory,
-                                style: AppTheme
-                                    .darkThemeData.textTheme.displayMedium!
-                                    .copyWith(
+                                style: TextStyle(
                                   fontSize: 16,
                                   height: 1.2,
+                                  color: context
+                                              .read<ThemeManager>()
+                                              .currentTheme ==
+                                          'dark'
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                               IconButton(
@@ -168,16 +161,21 @@ class _SelectInterestsState extends State<SelectInterests> {
                                         Icons.radio_button_unchecked,
                                         size: 18,
                                       )
-                                    : const Icon(
+                                    : Icon(
                                         Icons.check_circle,
                                         size: 18,
-                                        color: AppPallete.primaryColor,
+                                        color: context
+                                                    .read<ThemeManager>()
+                                                    .currentTheme ==
+                                                'dark'
+                                            ? AppPallete.primaryColor
+                                            : AppPallete.primaryLightColor,
                                       ),
                               ),
                             ],
                           ),
                           const Divider(
-                            thickness: .5,
+                            thickness: .125,
                             color: AppPallete.grayDark,
                           ),
                         ],

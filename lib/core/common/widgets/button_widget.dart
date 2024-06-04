@@ -1,6 +1,8 @@
+import 'package:blog_app/core/common/cubits/managers/theme_manager.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String buttonText;
@@ -54,7 +56,9 @@ class ButtonWidget extends StatelessWidget {
                   style:
                       AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
                     color: isActive
-                        ? AppPallete.scaffoldBackGroundColor
+                        ? context.read<ThemeManager>().currentTheme == 'light'
+                            ? Colors.white
+                            : AppPallete.scaffoldBackGroundColor
                         : AppPallete.deactivatedTextColor,
                     fontWeight: !isActive ? FontWeight.w600 : FontWeight.w500,
                   ),

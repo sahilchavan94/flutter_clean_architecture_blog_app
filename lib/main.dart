@@ -103,7 +103,7 @@ class _MyAppState extends State<MyApp> {
           : context.watch<ThemeManager>().currentTheme == 'light'
               ? AppTheme.lightThemeData
               : AppTheme.lightThemeData,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       home: BlocSelector<CurrentUserCubit, CurrentUserState, bool>(
         selector: (state) => state is CurrentUserDataFetched,
         builder: (context, isFetched) {

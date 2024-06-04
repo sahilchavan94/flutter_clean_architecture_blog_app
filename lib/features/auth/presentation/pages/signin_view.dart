@@ -2,6 +2,7 @@ import 'package:blog_app/core/strings/strings.dart';
 import 'package:blog_app/features/blog/presentation/pages/blog_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blog_app/core/theme/app_theme.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
@@ -77,147 +78,171 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
           }
         },
         builder: (context, state) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: MediaQuery.of(context).size.height * .1,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Theme.of(context).brightness == Brightness.dark
-                          ? Image.asset(
-                              'assets/images/blog_logo.png',
-                              height: 32,
-                              width: 32,
-                            )
-                          : Image.asset(
-                              'assets/images/blog_logo_light_2.png',
-                              height: 32,
-                              width: 32,
-                            ),
-                      const SizedBox(
-                        width: 10,
+          return ScrollConfiguration(
+            behavior: const CupertinoScrollBehavior(),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: MediaQuery.of(context).size.height * .1,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    // Theme.of(context).brightness == Brightness.dark
+                    //     ? Image.asset(
+                    //         'assets/images/blog_logo.png',
+                    //         height: 32,
+                    //         width: 32,
+                    //       )
+                    //     : Image.asset(
+                    //         'assets/images/blog_logo_light_2.png',
+                    //         height: 32,
+                    //         width: 32,
+                    //       ),
+                    // const SizedBox(
+                    //   width: 10,
+                    // ),
+                    Text(
+                      'Welcome back 🎉',
+                      style: AppTheme.darkThemeData.textTheme.displayLarge!
+                          .copyWith(
+                        fontSize: 28,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : AppPallete.primaryLightColor,
+                        fontWeight: FontWeight.w600,
                       ),
-                      Text(
-                        'Welcome back',
-                        style: AppTheme.darkThemeData.textTheme.displayLarge!
-                            .copyWith(
-                          color: Theme.of(context).brightness != Brightness.dark
-                              ? AppPallete.grayDark
-                              : Colors.white,
-                        ),
+                    ),
+
+                    Text(
+                      AppStrings.signInString,
+                      style: AppTheme.darkThemeData.textTheme.displaySmall!
+                          .copyWith(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppPallete.grayLabel
+                            : AppPallete.grayDark,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
                       ),
-                    ],
-                  ),
-
-                  const SizedBox(
-                    height: 8,
-                  ),
-
-                  Text(
-                    AppStrings.signInString,
-                    style:
-                        AppTheme.darkThemeData.textTheme.displaySmall!.copyWith(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? AppPallete.grayLabel
-                          : AppPallete.grayDark,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w300,
                     ),
-                  ),
 
-                  //form
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        AuthInputWidget(
-                          hintText: 'Enter your email',
-                          labelText: 'Email',
-                          textEditingController: _emailController,
-                          validator: emailValidator,
-                          suffixIcon: const Icon(
-                            CupertinoIcons.mail_solid,
-                          ),
-                        ),
-                        AuthInputWidget(
-                          hintText: 'Enter your password',
-                          labelText: 'Password',
-                          textEditingController: _passwordController,
-                          obscureText: hidePassword,
-                          onPressed: () {
-                            setState(() {
-                              hidePassword = !hidePassword;
-                            });
-                          },
-                          suffixIcon: const Icon(
-                            CupertinoIcons.lock_fill,
-                          ),
-                          validator: passwordValidator,
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        ButtonWidget(
-                          isLoading: state.runtimeType == AuthLoading,
-                          buttonText: 'Continue',
-                          onPressed: () {
-                            context.read<AuthBloc>().add(
-                                  AuthSignIn(
-                                    _emailController.text.trim(),
-                                    _passwordController.text.trim(),
-                                  ),
-                                );
-                          },
-                          isActive: isActive,
-                        ),
-                      ],
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 45,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const SignUpView();
-                          },
-                        ),
-                      );
-                    },
-                    child: RichText(
-                      text: TextSpan(
+                    //form
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          const TextSpan(
-                            text: 'Don\'t have an account? ',
-                            style: TextStyle(
-                              color: AppPallete.grayLight,
+                          AuthInputWidget(
+                            hintText: 'Enter your email',
+                            labelText: 'Email',
+                            textEditingController: _emailController,
+                            validator: emailValidator,
+                            suffixIcon: const Icon(
+                              CupertinoIcons.mail_solid,
                             ),
                           ),
-                          TextSpan(
-                            text: 'Sign Up',
-                            style: TextStyle(
-                              color: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? AppPallete.primaryColor
-                                  : AppPallete.primaryLightColor,
-                              fontWeight: FontWeight.w500,
+                          AuthInputWidget(
+                            hintText: 'Enter your password',
+                            labelText: 'Password',
+                            textEditingController: _passwordController,
+                            obscureText: hidePassword,
+                            onPressed: () {
+                              setState(() {
+                                hidePassword = !hidePassword;
+                              });
+                            },
+                            suffixIcon: const Icon(
+                              CupertinoIcons.lock_fill,
                             ),
-                          )
+                            validator: passwordValidator,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('To do'),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Forgot password',
+                              style: AppTheme
+                                  .darkThemeData.textTheme.displayMedium!
+                                  .copyWith(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.white
+                                    : AppPallete.primaryLightColor,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          ButtonWidget(
+                            isLoading: state.runtimeType == AuthLoading,
+                            buttonText: 'Continue',
+                            onPressed: () {
+                              context.read<AuthBloc>().add(
+                                    AuthSignIn(
+                                      _emailController.text.trim(),
+                                      _passwordController.text.trim(),
+                                    ),
+                                  );
+                            },
+                            isActive: isActive,
+                          ),
                         ],
                       ),
                     ),
-                  )
-                ],
+                    const SizedBox(
+                      height: 45,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const SignUpView();
+                            },
+                          ),
+                        );
+                      },
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: 'Don\'t have an account? ',
+                                style: TextStyle(
+                                  color: AppPallete.grayLight,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'Sign Up',
+                                style: TextStyle(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? AppPallete.primaryColor
+                                      : AppPallete.primaryLightColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           );

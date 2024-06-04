@@ -49,7 +49,7 @@ class AppTheme {
     ),
 
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: AppPallete.grayDark,
+      cursorColor: Colors.white,
       selectionColor: AppPallete.grayDark,
       selectionHandleColor: AppPallete.grayLabel,
     ),
@@ -80,25 +80,31 @@ class AppTheme {
         vertical: 9,
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(23),
         borderSide: const BorderSide(
           color: AppPallete.grayDark,
         ),
       ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(23),
+        borderSide: const BorderSide(
+          color: AppPallete.errorColor,
+        ),
+      ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(23),
         borderSide: const BorderSide(
           color: AppPallete.grayDark,
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(23),
         borderSide: const BorderSide(
           color: AppPallete.grayDark,
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(23),
         borderSide: const BorderSide(
           color: AppPallete.grayDark,
         ),
@@ -192,12 +198,12 @@ class AppTheme {
     ),
 
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: AppPallete.grayDark,
-      selectionColor: AppPallete.grayDark,
+      cursorColor: Colors.black,
+      selectionColor: AppPallete.grayLabel,
       selectionHandleColor: AppPallete.grayLabel,
     ),
     snackBarTheme: const SnackBarThemeData(
-      closeIconColor: AppPallete.errorColor,
+      closeIconColor: AppPallete.errorLightColor,
       showCloseIcon: true,
       // actionTextColor: AppPallete.errorColor,
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
@@ -223,23 +229,31 @@ class AppTheme {
         vertical: 9,
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
-        borderSide: const BorderSide(color: AppPallete.grayLight),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(23),
         borderSide: const BorderSide(
           color: AppPallete.grayLight,
         ),
       ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(23),
+        borderSide: const BorderSide(
+          color: AppPallete.grayLight,
+        ),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(23),
+        borderSide: const BorderSide(
+          color: AppPallete.errorLightColor,
+        ),
+      ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(23),
         borderSide: const BorderSide(
           color: AppPallete.grayLight,
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(23),
         borderSide: const BorderSide(
           color: AppPallete.grayLight,
         ),
@@ -248,7 +262,7 @@ class AppTheme {
         fontSize: 14,
         height: .4,
         fontWeight: FontWeight.w400,
-        color: AppPallete.errorColor,
+        color: AppPallete.errorLightColor,
         fontFamily: GoogleFonts.roboto().fontFamily,
       ),
       helperStyle: TextStyle(

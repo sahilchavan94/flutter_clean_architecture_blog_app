@@ -22,37 +22,40 @@ class _PersonalInterestsWidgetState extends State<PersonalInterestsWidget> {
             .userEntity
             .interestedCategories;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 7.5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Personal Interests',
-            style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
-              fontWeight: FontWeight.w400,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? AppPallete.primaryColor
-                  : AppPallete.primaryLightColor,
+    return SizedBox(
+      width: double.maxFinite,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Personal Interests',
+              style: AppTheme.darkThemeData.textTheme.displayLarge!.copyWith(
+                fontWeight: FontWeight.w400,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppPallete.primaryColor
+                    : AppPallete.primaryLightColor,
+              ),
             ),
-          ),
-          Text(
-            AppStrings.personalInterestString,
-            style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? AppPallete.tabLabelUnselectedColor
-                  : AppPallete.grayDark,
+            Text(
+              AppStrings.personalInterestString,
+              style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppPallete.tabLabelUnselectedColor
+                    : AppPallete.grayDark,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          BlogInterestWrapper(list: list),
-        ],
+            const SizedBox(
+              height: 8,
+            ),
+            BlogInterestWrapper(list: list),
+          ],
+        ),
       ),
     );
   }

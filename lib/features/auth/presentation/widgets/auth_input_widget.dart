@@ -12,6 +12,7 @@ class AuthInputWidget extends StatefulWidget {
   final Function? onPressed;
   final Function validator;
   final TextEditingController textEditingController;
+  final bool? applyTopPadding;
 
   const AuthInputWidget({
     super.key,
@@ -23,6 +24,7 @@ class AuthInputWidget extends StatefulWidget {
     required this.validator,
     this.width,
     this.onPressed,
+    this.applyTopPadding,
   });
 
   @override
@@ -33,22 +35,24 @@ class _AuthInputWidgetState extends State<AuthInputWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 20.0),
+      padding: EdgeInsets.only(top: widget.applyTopPadding == true ? 20.0 : 0),
       width: widget.width ?? MediaQuery.of(context).size.width * 90,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.labelText,
-            style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? AppPallete.grayLabel
-                  : AppPallete.grayDark,
+          if (widget.labelText.isNotEmpty)
+            Text(
+              widget.labelText,
+              style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppPallete.grayLabel
+                    : AppPallete.grayDark,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
+          if (widget.labelText.isNotEmpty)
+            const SizedBox(
+              height: 4,
+            ),
           TextFormField(
             style: AppTheme.darkThemeData.textTheme.displayMedium!.copyWith(
               color: Theme.of(context).brightness == Brightness.dark
@@ -75,12 +79,6 @@ class _AuthInputWidgetState extends State<AuthInputWidget> {
               prefix: const Padding(
                 padding: EdgeInsets.only(
                   left: 20,
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: const BorderSide(
-                  color: AppPallete.grayDark,
                 ),
               ),
               suffixIcon: widget.suffixIcon != null
