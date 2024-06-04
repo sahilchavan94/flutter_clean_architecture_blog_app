@@ -99,6 +99,10 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                       )
                     : GestureDetector(
                         onTap: () {
+                          if (currentUserData
+                              .userEntity.profileImageUrl.isEmpty) {
+                            return;
+                          }
                           Navigator.push(
                             context,
                             MaterialPageRoute(
