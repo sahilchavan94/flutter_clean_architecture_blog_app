@@ -21,7 +21,8 @@ Clean Architecture is a software design approach that emphasizes separating conc
 - Flutter
 - Fpdart 
 - Firebase 
-- Hive 
+- Hive
+- Shared Preferences
 
 ## Installation
 
