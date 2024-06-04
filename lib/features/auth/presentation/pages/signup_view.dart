@@ -140,8 +140,10 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
                                 labelText: 'First name',
                                 textEditingController: _firstNameController,
                                 validator: validator,
-                                suffixIcon:
-                                    const Icon(CupertinoIcons.person_fill),
+                                suffixIcon: const Icon(
+                                  CupertinoIcons.person_fill,
+                                ),
+                                applyTopPadding: true,
                               ),
                               AuthInputWidget(
                                 width: MediaQuery.of(context).size.width * .44,
@@ -149,8 +151,10 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
                                 labelText: 'Last name',
                                 textEditingController: _lastNameController,
                                 validator: validator,
-                                suffixIcon:
-                                    const Icon(CupertinoIcons.person_fill),
+                                suffixIcon: const Icon(
+                                  CupertinoIcons.person_fill,
+                                ),
+                                applyTopPadding: true,
                               ),
                             ],
                           ),
@@ -159,7 +163,10 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
                             labelText: 'Email',
                             textEditingController: _emailController,
                             validator: emailValidator,
-                            suffixIcon: const Icon(CupertinoIcons.mail_solid),
+                            suffixIcon: const Icon(
+                              CupertinoIcons.mail_solid,
+                            ),
+                            applyTopPadding: true,
                           ),
                           AuthInputWidget(
                             hintText: 'Enter your password',
@@ -174,9 +181,11 @@ class _SignUpViewState extends State<SignUpView> with AuthValidators {
                                 hidePassword = !hidePassword;
                               });
                             },
+                            applyTopPadding: true,
                             validator: passwordValidator,
                           ),
                           AuthInputWidget(
+                            applyTopPadding: true,
                             hintText: 'Confirm your password',
                             labelText: 'Confirm password',
                             textEditingController: _confirmPasswordController,

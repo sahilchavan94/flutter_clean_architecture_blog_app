@@ -145,6 +145,7 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
                             suffixIcon: const Icon(
                               CupertinoIcons.mail_solid,
                             ),
+                            applyTopPadding: true,
                           ),
                           AuthInputWidget(
                             hintText: 'Enter your password',
@@ -159,6 +160,7 @@ class _SignInViewState extends State<SignInView> with AuthValidators {
                             suffixIcon: const Icon(
                               CupertinoIcons.lock_fill,
                             ),
+                            applyTopPadding: true,
                             validator: passwordValidator,
                           ),
                           GestureDetector(
