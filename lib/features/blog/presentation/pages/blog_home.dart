@@ -145,7 +145,7 @@ class _BlogHomeState extends State<BlogHome> with TickerProviderStateMixin {
               ],
             ),
             body: Container(
-              padding: const EdgeInsets.all(2.5),
+              padding: const EdgeInsets.all(7.5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
