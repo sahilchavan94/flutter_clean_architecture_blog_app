@@ -5,7 +5,7 @@ A blog application built with flutter for android/ios mobile devices which provi
 
 This application makes use of clean architecture and it's state management is implemented with flutter bloc and provider. The main goal of this application is to learn the aspects of clean architecture which uses 3 layers of data, domain and presentation. 
 
-Clean Architecture is a software design approach that emphasizes separating concerns within a system into distinct layers, each with clear boundaries and dependencies. It aims to create systems that are easy to understand, maintain, and extend by promoting modularity, testability, and flexibility. The core principles include separating business logic from implementation details, dependency inversion, and the dependency rule, which states that dependencies should flow towards more abstract, stable components.
+Clean Architecture is a software design approach that emphasizes separating concerns within a system into distinct layers, each with clear boundaries and dependencies. It aims to create systems that are easy to understand, maintain, and extend by promoting modularity, testability, and flexibility. The core principles include separating business logic from implementation details, dependency inversion, and the dependency rule, which states that dependencies should flow towards more abstract, stable components ( latest code on final branch ).
 
 
 ## Features
