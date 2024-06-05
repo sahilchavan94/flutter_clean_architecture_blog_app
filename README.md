@@ -40,7 +40,8 @@ flutter run
 ```
 ## Screenshots
 
-![Group 2bg](https://github.com/sahilchavan94/flutter_clean_architecture_blog_app/assets/142314251/4bba31ca-b8d5-4e7a-9429-b096388a0c14)
+![329833099-4bba31ca-b8d5-4e7a-9429-b096388a0c14](https://github.com/sahilchavan94/flutter_clean_architecture_blog_app/assets/142314251/8297ee9b-7e4a-4051-8d1f-0b8aa72d90ef)
+
 
 
 ## What I learned ? 
